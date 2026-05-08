@@ -1,0 +1,795 @@
+{
+  "_info": {
+    "name": "NY-GCR Ultimate Profile",
+    "version": "4.0",
+    "description": "Full NYC (JFK) geo-cloaking profile. Maximum anonymity, no traces, all traffic through JFK.",
+    "philosophy": "Everything through JFK. No exceptions for tracking or analytics. Maximum privacy.",
+    "changelog": "v4.0 - Fixed all issues, enabled all services, removed bypasses for analytics, added maximum privacy rules.",
+    "author": "Manus AI",
+    "last_updated": "2026-05-07"
+  },
+  "name": "NY-GCR Ultimate",
+  "profile": {
+    "flt": {
+      "ads": {
+        "do": 0,
+        "status": 1,
+        "lvl": "ads_strict",
+        "note": "Strict ad blocking"
+      },
+      "malware": {
+        "do": 0,
+        "status": 1,
+        "note": "Block malware/phishing"
+      },
+      "typo": {
+        "do": 0,
+        "status": 1,
+        "note": "Block typo-squatting domains"
+      },
+      "iot": {
+        "do": 0,
+        "status": 1,
+        "note": "Block IoT telemetry"
+      },
+      "x-hagezi-proplus": {
+        "do": 0,
+        "status": 1,
+        "note": "Hagezi Pro++ blocklist"
+      },
+      "x-oisd": {
+        "do": 0,
+        "status": 1,
+        "note": "OISD full blocklist"
+      },
+      "tracking": {
+        "do": 0,
+        "status": 1,
+        "note": "Block all tracking"
+      }
+    },
+    "cflt": [],
+    "ipflt": {
+      "ip_malware": {
+        "do": 0,
+        "status": 1,
+        "note": "IP-level malware protection"
+      }
+    },
+    "rule": [
+      {
+        "PK": "whoami.controld.com",
+        "order": 1,
+        "group": 0,
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        },
+        "note": "Verify JFK routing"
+      },
+      {
+        "PK": "ipinfo.io",
+        "order": 2,
+        "group": 0,
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        },
+        "note": "IP check through JFK"
+      },
+      {
+        "PK": "browserleaks.com",
+        "order": 3,
+        "group": 0,
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        },
+        "note": "Privacy check through JFK"
+      },
+      {
+        "PK": "*.facebook.com",
+        "order": 10,
+        "group": 0,
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      {
+        "PK": "*.instagram.com",
+        "order": 11,
+        "group": 0,
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      {
+        "PK": "*.fbcdn.net",
+        "order": 12,
+        "group": 0,
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      {
+        "PK": "*.google.com",
+        "order": 20,
+        "group": 0,
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      {
+        "PK": "*.googleapis.com",
+        "order": 21,
+        "group": 0,
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      {
+        "PK": "*.openai.com",
+        "order": 22,
+        "group": 0,
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      {
+        "PK": "chatgpt.com",
+        "order": 23,
+        "group": 0,
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      {
+        "PK": "universal-all",
+        "order": 999,
+        "group": 0,
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        },
+        "note": "ULTIMATE: Everything through JFK"
+      }
+    ],
+    "geo_custom_rules": [
+      {
+        "id": "geo_not_us",
+        "order": 1,
+        "condition": {
+          "country_not": [
+            "US"
+          ]
+        },
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        },
+        "note": "Force JFK for all non-US traffic"
+      }
+    ],
+    "svc": {
+      "google": {
+        "type": "svc",
+        "key": "google",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "youtube": {
+        "type": "svc",
+        "key": "youtube",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "facebook": {
+        "type": "svc",
+        "key": "facebook",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "instagram": {
+        "type": "svc",
+        "key": "instagram",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "chatgpt": {
+        "type": "svc",
+        "key": "chatgpt",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "claude": {
+        "type": "svc",
+        "key": "claude",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "openai": {
+        "type": "svc",
+        "key": "openai",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "gemini": {
+        "type": "svc",
+        "key": "gemini",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "grok": {
+        "type": "svc",
+        "key": "grok",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "telegram": {
+        "type": "svc",
+        "key": "telegram",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "whatsapp": {
+        "type": "svc",
+        "key": "whatsapp",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "twitter": {
+        "type": "svc",
+        "key": "twitter",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "reddit": {
+        "type": "svc",
+        "key": "reddit",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "tiktok": {
+        "type": "svc",
+        "key": "tiktok",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "linkedin": {
+        "type": "svc",
+        "key": "linkedin",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "github": {
+        "type": "svc",
+        "key": "github",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "discord": {
+        "type": "svc",
+        "key": "discord",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "netflix": {
+        "type": "svc",
+        "key": "netflix",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "hulu": {
+        "type": "svc",
+        "key": "hulu",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "spotify": {
+        "type": "svc",
+        "key": "spotify",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "twitch": {
+        "type": "svc",
+        "key": "twitch",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "amazon": {
+        "type": "svc",
+        "key": "amazon",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "ebay": {
+        "type": "svc",
+        "key": "ebay",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "paypal": {
+        "type": "svc",
+        "key": "paypal",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "wise": {
+        "type": "svc",
+        "key": "wise",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "revolut": {
+        "type": "svc",
+        "key": "revolut",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "apple": {
+        "type": "svc",
+        "key": "apple",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "microsoft": {
+        "type": "svc",
+        "key": "microsoft",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "bing": {
+        "type": "svc",
+        "key": "bing",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "msoutlook": {
+        "type": "svc",
+        "key": "msoutlook",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "xbox": {
+        "type": "svc",
+        "key": "xbox",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "azure": {
+        "type": "svc",
+        "key": "azure",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "aws": {
+        "type": "svc",
+        "key": "aws",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "googlecloud": {
+        "type": "svc",
+        "key": "googlecloud",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "digitalocean": {
+        "type": "svc",
+        "key": "digitalocean",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "coinbase": {
+        "type": "svc",
+        "key": "coinbase",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "binance": {
+        "type": "svc",
+        "key": "binance",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "visa": {
+        "type": "svc",
+        "key": "visa",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "mastercard": {
+        "type": "svc",
+        "key": "mastercard",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "amex": {
+        "type": "svc",
+        "key": "amex",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "jpmorganchase": {
+        "type": "svc",
+        "key": "jpmorganchase",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "wellsfargo": {
+        "type": "svc",
+        "key": "wellsfargo",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "citi": {
+        "type": "svc",
+        "key": "citi",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "bankofamerica": {
+        "type": "svc",
+        "key": "bankofamerica",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "protonmail": {
+        "type": "svc",
+        "key": "protonmail",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "protonvpn": {
+        "type": "svc",
+        "key": "protonvpn",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "mullvad": {
+        "type": "svc",
+        "key": "mullvad",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "windscribe": {
+        "type": "svc",
+        "key": "windscribe",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "adguardvpn": {
+        "type": "svc",
+        "key": "adguardvpn",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "expressvpn": {
+        "type": "svc",
+        "key": "expressvpn",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "nordvpn": {
+        "type": "svc",
+        "key": "nordvpn",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "zoom": {
+        "type": "svc",
+        "key": "zoom",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "slack": {
+        "type": "svc",
+        "key": "slack",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "notion": {
+        "type": "svc",
+        "key": "notion",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "trello": {
+        "type": "svc",
+        "key": "trello",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "asana": {
+        "type": "svc",
+        "key": "asana",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "canva": {
+        "type": "svc",
+        "key": "canva",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "adobe": {
+        "type": "svc",
+        "key": "adobe",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "figma": {
+        "type": "svc",
+        "key": "figma",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "dropbox": {
+        "type": "svc",
+        "key": "dropbox",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "onedrive": {
+        "type": "svc",
+        "key": "onedrive",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "yandex": {
+        "type": "svc",
+        "key": "yandex",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "mailru": {
+        "type": "svc",
+        "key": "mailru",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "vk": {
+        "type": "svc",
+        "key": "vk",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "ok": {
+        "type": "svc",
+        "key": "ok",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "rutube": {
+        "type": "svc",
+        "key": "rutube",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      }
+    },
+    "da": {
+      "do": 3,
+      "status": 1,
+      "via": "JFK",
+      "note": "Default action: REDIRECT JFK"
+    }
+  }
+}

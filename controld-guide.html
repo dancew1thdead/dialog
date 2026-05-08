@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Control D: Полный гайд</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+body { margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 10.5pt; line-height: 1.65; color: #333; text-align: justify; text-align-last: left; }
+* { box-sizing: border-box; }
+
+/* ===== PAGE SETUP ===== */
+@page { size: A4; margin: 2.2cm 2cm 2.5cm 2cm; @top-center { content: string(doctitle); font-size: 8pt; color: #888; } @bottom-center { content: counter(page); font-size: 8pt; color: #888; } }
+@page :first { margin: 0; @top-center { content: none; } @bottom-center { content: none; } }
+@page cover { @top-center { content: none; } @bottom-center { content: none; } }
+@page toc { @top-center { content: none; } @bottom-center { content: none; } }
+body { string-set: doctitle ""; }
+h1 { string-set: doctitle content(); }
+
+/* ===== COVER ===== */
+.cover { page: cover; width: 210mm; height: 297mm; margin: 0; position: relative; overflow: hidden; page-break-after: always; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+.cover::before { content: ''; position: absolute; top: -50%; right: -30%; width: 80%; height: 150%; background: radial-gradient(circle, rgba(94, 129, 172, 0.15) 0%, transparent 70%); border-radius: 50%; }
+.cover::after { content: ''; position: absolute; bottom: -30%; left: -20%; width: 60%; height: 80%; background: radial-gradient(circle, rgba(129, 178, 154, 0.1) 0%, transparent 70%); border-radius: 50%; }
+.cover-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 85%; z-index: 2; }
+.cover-badge { display: inline-block; background: rgba(255,255,255,0.12); color: #a8d0e6; font-size: 9pt; padding: 6px 18px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2cm; }
+.cover-title { font-size: 38pt; font-weight: 700; color: #ffffff; margin: 0 0 0.5cm 0; letter-spacing: -0.5px; }
+.cover-subtitle { font-size: 15pt; color: #a8d0e6; font-weight: 300; margin-bottom: 2.5cm; line-height: 1.5; }
+.cover-meta { font-size: 10pt; color: rgba(255,255,255,0.6); line-height: 2.2; }
+.cover-meta span { display: block; }
+.cover-footer { position: absolute; bottom: 2cm; left: 50%; transform: translateX(-50%); text-align: center; color: rgba(255,255,255,0.35); font-size: 8pt; z-index: 2; }
+.cover-grid { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 40px 40px; z-index: 1; }
+
+/* ===== TOC ===== */
+.toc-page { page: toc; page-break-after: always; padding-top: 1cm; }
+.toc-title { font-size: 22pt; font-weight: 600; color: #1a1a2e; margin-bottom: 1cm; text-align: center; border-bottom: 2px solid #0f3460; padding-bottom: 0.5cm; }
+.toc { list-style: none; padding: 0; margin: 0; }
+.toc li { margin: 0; padding: 0; }
+.toc a { text-decoration: none; color: #333; display: flex; align-items: baseline; padding: 4px 0; font-size: 10.5pt; }
+.toc a::after { content: leader('.') target-counter(attr(href url), page); flex-shrink: 0; margin-left: 8px; color: #666; }
+.toc .toc-h1 { font-weight: 600; font-size: 11pt; margin-top: 8px; color: #0f3460; }
+.toc .toc-h2 { padding-left: 1.2em; font-size: 10pt; color: #444; }
+.toc .toc-h3 { padding-left: 2.4em; font-size: 9.5pt; color: #555; }
+
+/* ===== HEADINGS ===== */
+h1 { font-size: 20pt; font-weight: 700; color: #1a1a2e; margin: 1.5cm 0 0.6cm 0; padding-bottom: 0.3cm; border-bottom: 2px solid #0f3460; page-break-after: avoid; }
+h2 { font-size: 14pt; font-weight: 600; color: #16213e; margin: 1cm 0 0.4cm 0; padding-left: 0.4cm; border-left: 3px solid #0f3460; page-break-after: avoid; }
+h3 { font-size: 11.5pt; font-weight: 600; color: #333; margin: 0.7cm 0 0.3cm 0; page-break-after: avoid; }
+h4 { font-size: 10.5pt; font-weight: 600; color: #444; margin: 0.5cm 0 0.2cm 0; page-break-after: avoid; }
+
+/* ===== TABLES ===== */
+table { width: 100%; max-width: 100%; border-collapse: collapse; margin: 0.6cm 0; font-size: 9.5pt; page-break-inside: auto; }
+thead { display: table-header-group; }
+tr { page-break-inside: avoid; }
+th { background: #f0f4f8; color: #1a1a2e; font-weight: 600; padding: 8px 10px; text-align: left; border-top: 2px solid #333; border-bottom: 1.5px solid #333; }
+td { padding: 6px 10px; border-bottom: 0.5px solid #ddd; vertical-align: top; }
+tbody tr:last-child td { border-bottom: 2px solid #333; }
+
+/* ===== CODE ===== */
+code { font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace; font-size: 8.5pt; background: #f5f7fa; padding: 1px 5px; border-radius: 3px; color: #c7254e; word-break: break-word; }
+pre { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; padding: 12px 14px; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; font-size: 8pt; line-height: 1.5; max-width: 100%; margin: 0.5cm 0; }
+pre code { background: none; padding: 0; color: #333; font-size: 8pt; }
+
+/* ===== CALLOUTS ===== */
+.tip { background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-left: 4px solid #4caf50; padding: 12px 16px; margin: 0.5cm 0; border-radius: 0 6px 6px 0; }
+.tip-title { font-weight: 600; color: #2e7d32; font-size: 10pt; margin-bottom: 4px; }
+.warning { background: linear-gradient(135deg, #fff3e0 0%, #fce4ec 100%); border-left: 4px solid #ff9800; padding: 12px 16px; margin: 0.5cm 0; border-radius: 0 6px 6px 0; }
+.warning-title { font-weight: 600; color: #e65100; font-size: 10pt; margin-bottom: 4px; }
+.info { background: linear-gradient(135deg, #e3f2fd 0%, #e8eaf6 100%); border-left: 4px solid #2196f3; padding: 12px 16px; margin: 0.5cm 0; border-radius: 0 6px 6px 0; }
+.info-title { font-weight: 600; color: #1565c0; font-size: 10pt; margin-bottom: 4px; }
+.danger { background: linear-gradient(135deg, #fce4ec 0%, #fbe9e7 100%); border-left: 4px solid #f44336; padding: 12px 16px; margin: 0.5cm 0; border-radius: 0 6px 6px 0; }
+.danger-title { font-weight: 600; color: #c62828; font-size: 10pt; margin-bottom: 4px; }
+
+/* ===== LISTS ===== */
+ul, ol { margin: 0.4cm 0; padding-left: 1.5em; }
+li { margin-bottom: 0.15cm; }
+
+/* ===== FIGURES ===== */
+figure { margin: 0.6cm 0; text-align: center; page-break-inside: avoid; }
+figure img, figure svg { max-width: 85%; max-height: 35vh; height: auto; }
+figcaption { font-size: 9pt; color: #666; margin-top: 0.3cm; font-style: italic; }
+
+/* ===== MISC ===== */
+.section { margin-bottom: 0.8cm; }
+hr { border: none; border-top: 1px solid #ddd; margin: 1cm 0; }
+.accent { color: #0f3460; font-weight: 600; }
+.tag { display: inline-flex; align-items: center; justify-content: center; background: #e3f2fd; color: #1565c0; font-size: 7.5pt; padding: 2px 8px; border-radius: 12px; font-weight: 500; margin: 0 2px; }
+kbd { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(180deg, #f5f5f5 0%, #e0e0e0 100%); border: 1px solid #bbb; border-radius: 4px; padding: 1px 6px; font-size: 8pt; font-family: 'SF Mono', monospace; box-shadow: 0 1px 1px rgba(0,0,0,0.1); }
+
+/* ===== OVERFLOW PREVENTION ===== */
+pre, table, figure, img, svg, blockquote { max-width: 100%; box-sizing: border-box; }
+a { word-break: break-all; color: #0f3460; }
+.katex-display { overflow-x: auto; }
+
+/* ===== PROFILE CARDS ===== */
+.profile-card { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 14px 16px; margin: 0.5cm 0; }
+.profile-card-title { font-weight: 600; color: #1a1a2e; font-size: 11pt; margin-bottom: 6px; }
+
+/* ===== STEP LIST ===== */
+.step-list { counter-reset: none; list-style: none; padding: 0; }
+.step-list li { position: relative; padding-left: 2em; margin-bottom: 0.4cm; }
+.step-list li .step-num { position: absolute; left: 0; top: 0; display: inline-flex; align-items: center; justify-content: center; width: 1.4em; height: 1.4em; background: #0f3460; color: white; border-radius: 50%; font-size: 9pt; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<div class="cover">
+<div class="cover-grid"></div>
+<div class="cover-content">
+<div class="cover-badge">Полное руководство 2025</div>
+<h1 class="cover-title" style="border:none; color:#fff; margin:0 0 0.5cm 0; padding:0;">Control D</h1>
+<p class="cover-subtitle">Настраиваемый DNS-резолвер: фильтрация,<br>перенаправление трафика и приватность</p>
+<div class="cover-meta">
+<span>Полный гайд с объяснением принципов работы,</span>
+<span>практическими примерами и профилями</span>
+<span>для маскировки геолокации под Нью-Йорк</span>
+</div>
+</div>
+<div class="cover-footer">docs.controld.com &middot; controld.com</div>
+</div>
+
+<!-- ===== TABLE OF CONTENTS ===== -->
+<div class="toc-page">
+<div class="toc-title">Содержание</div>
+<ul class="toc">
+<li class="toc-h1"><a href="#sec1">1. Введение в Control D</a></li>
+<li class="toc-h2"><a href="#sec1-1">1.1 Что такое DNS</a></li>
+<li class="toc-h2"><a href="#sec1-2">1.2 Как работает Control D</a></li>
+<li class="toc-h2"><a href="#sec1-3">1.3 Ключевые возможности</a></li>
+<li class="toc-h1"><a href="#sec2">2. Основные компоненты</a></li>
+<li class="toc-h2"><a href="#sec2-1">2.1 Профили (Profiles)</a></li>
+<li class="toc-h2"><a href="#sec2-2">2.2 Фильтры (Filters)</a></li>
+<li class="toc-h2"><a href="#sec2-3">2.3 Сервисы (Services)</a></li>
+<li class="toc-h2"><a href="#sec2-4">2.4 Пользовательские правила (Custom Rules)</a></li>
+<li class="toc-h2"><a href="#sec2-5">2.5 Гео-правила (Geo Custom Rules)</a></li>
+<li class="toc-h2"><a href="#sec2-6">2.6 Правило по умолчанию (Default Rule)</a></li>
+<li class="toc-h1"><a href="#sec3">3. Настройка и развертывание</a></li>
+<li class="toc-h2"><a href="#sec3-1">3.1 Создание Endpoint</a></li>
+<li class="toc-h2"><a href="#sec3-2">3.2 DNS-протоколы</a></li>
+<li class="toc-h2"><a href="#sec3-3">3.3 Платформы и установка</a></li>
+<li class="toc-h1"><a href="#sec4">4. Профильные опции</a></li>
+<li class="toc-h2"><a href="#sec4-1">4.1 Защита от ребиндинга</a></li>
+<li class="toc-h2"><a href="#sec4-2">4.2 TTL-оверрайды</a></li>
+<li class="toc-h2"><a href="#sec4-3">4.3 AI Malware Filter</a></li>
+<li class="toc-h2"><a href="#sec4-4">4.4 Safe Search и Restricted YouTube</a></li>
+<li class="toc-h2"><a href="#sec4-5">4.5 EDNS Client Subnet</a></li>
+<li class="toc-h1"><a href="#sec5">5. Приоритет правил</a></li>
+<li class="toc-h1"><a href="#sec6">6. Аналитика и мониторинг</a></li>
+<li class="toc-h1"><a href="#sec7">7. Преимущества и ограничения</a></li>
+<li class="toc-h2"><a href="#sec7-1">7.1 Преимущества</a></li>
+<li class="toc-h2"><a href="#sec7-2">7.2 Ограничения</a></li>
+<li class="toc-h1"><a href="#sec8">8. Практические советы</a></li>
+<li class="toc-h1"><a href="#sec9">9. Профили для Нью-Йорка</a></li>
+<li class="toc-h2"><a href="#sec9-1">9.1 Философия JFK-профиля</a></li>
+<li class="toc-h2"><a href="#sec9-2">9.2 Структура JSON-профиля</a></li>
+<li class="toc-h2"><a href="#sec9-3">9.3 Готовый профиль NY-GCR</a></li>
+<li class="toc-h2"><a href="#sec9-4">9.4 Скрипты автоматизации</a></li>
+<li class="toc-h1"><a href="#sec10">10. Заключение</a></li>
+</ul>
+</div>
+
+<!-- ===== SECTION 1 ===== -->
+<h1 id="sec1">1. Введение в Control D</h1>
+
+<p><strong>Control D</strong> -- это настраиваемый DNS-резолвер и платформа фильтрации трафика, который позволяет управлять интернет-соединением на уровне DNS-запросов. В отличие от обычных DNS-серверов (Google DNS, Cloudflare), Control D дает гранулярный контроль над тем, какие домены разрешаются, блокируются или перенаправляются.</p>
+
+<div class="info">
+<div class="info-title">TL;DR</div>
+Control D -- это DNS-сервис, который можно настроить под свои нужды: блокировать рекламу, защищать от вредоносных сайтов, перенаправлять трафик через прокси в 100+ локациях.
+</div>
+
+<h2 id="sec1-1">1.1 Что такое DNS</h2>
+
+<p><strong>DNS (Domain Name System)</strong> -- это система, которая преобразует человекочитаемые доменные имена (например, <code>google.com</code>) в IP-адреса (например, <code>142.250.80.46</code>). Работает как телефонная книга интернета:</p>
+
+<table>
+<thead><tr><th>Этап</th><th>Описание</th></tr></thead>
+<tbody>
+<tr><td>Запрос пользователя</td><td>Вводите <code>example.com</code> в браузере</td></tr>
+<tr><td>Устройство</td><td>Отправляет запрос к DNS-резолверу</td></tr>
+<tr><td>Маршрутизатор</td><td>Пересылает запрос настроенному DNS-серверу</td></tr>
+<tr><td>DNS-провайдер</td><td>Обрабатывает запрос (ISP, Google, Cloudflare, Control D)</td></tr>
+<tr><td>Авторитативный сервер</td><td>Возвращает IP-адрес запрашиваемого домена</td></tr>
+</tbody>
+</table>
+
+<p>Обычно DNS-ответы статичны -- любой пользователь из любой точки мира получит одинаковый IP для одного домена. Исключение -- CDN, которые подбирают сервер ближе к вашей геолокации.</p>
+
+<h2 id="sec1-2">1.2 Как работает Control D</h2>
+
+<p>Control D предоставляет уникальные DNS-резолверы, которые могут манипулировать ответами на основе заданных правил. Вот что происходит при использовании:</p>
+
+<ol>
+<li><strong>Резолюция</strong>: По умолчанию Control D работает как обычный DNS-резолвер -- разрешает домены в IP-адреса.</li>
+<li><strong>Правила</strong>: Когда вы настраиваете фильтры, сервисы и кастомные правила, Control D начинает перехватывать DNS-запросы.</li>
+<li><strong>Действия</strong>: Для каждого запроса применяется одно из действий:
+<ul>
+<li><span class="tag">BYPASS</span> -- разрешить, вернуть реальный IP</li>
+<li><span class="tag">BLOCK</span> -- заблокировать (вернуть 0.0.0.0)</li>
+<li><span class="tag">REDIRECT</span> -- перенаправить через прокси в выбранной локации</li>
+</ul></li>
+</ol>
+
+<div class="tip">
+<div class="tip-title">Ключевая особенность</div>
+При перенаправлении (REDIRECT) Control D прозрачно проксирует SNI-трафик через серверы в выбранной локации. Сайт видит IP прокси, а не ваш реальный IP. Работает совместно с Windscribe (100+ городов).
+</div>
+
+<h2 id="sec1-3">1.3 Ключевые возможности</h2>
+
+<table>
+<thead><tr><th>Возможность</th><th>Описание</th><th>Практическое применение</th></tr></thead>
+<tbody>
+<tr><td>Фильтрация</td><td>Блокировка 20+ категорий + сторонние списки</td><td>Блокировка рекламы, трекеров, вредоносных доменов</td></tr>
+<tr><td>Перенаправление трафика</td><td>Проксирование через 100+ локаций</td><td>Маскировка геолокации, обход блокировок</td></tr>
+<tr><td>Защита от вредоносного ПО</td><td>ML-модель + threat intel feeds</td><td>Блокировка фишинга, malware в реальном времени</td></tr>
+<tr><td>Аналитика</td><td>Статистика запросов, блокировок, перенаправлений</td><td>Аудит использования, обнаружение проблем</td></tr>
+<tr><td>400+ сервисов</td><td>Готовые правила для популярных сайтов</td><td>Быстрая настройка без ручного перечисления доменов</td></tr>
+<tr><td>Гео-правила</td><td>Правила на основе страны/ASN назначения</td><td>Автоматический редирект если сайт не в US</td></tr>
+<tr><td>Шифрованные протоколы</td><td>DoH, DoT, DoQ, Legacy DNS</td><td>Защита DNS-запросов от перехвата</td></tr>
+</tbody>
+</table>
+
+<!-- ===== SECTION 2 ===== -->
+<h1 id="sec2">2. Основные компоненты</h1>
+
+<p>Архитектура Control D строится вокруг нескольких ключевых компонентов. Понимание их взаимодействия -- основа эффективной настройки.</p>
+
+<h2 id="sec2-1">2.1 Профили (Profiles)</h2>
+
+<p><strong>Профиль</strong> -- это набор правил и настроек, которые применяются к Endpoint. Аналогия: профиль = политика безопасности.</p>
+
+<p>Каждый профиль содержит:</p>
+<ul>
+<li><strong>Filters</strong> -- категории для блокировки</li>
+<li><strong>Services</strong> -- правила для конкретных сервисов</li>
+<li><strong>Custom Rules</strong> -- гранулярные правила на уровне доменов</li>
+<li><strong>Profile Options</strong> -- дополнительные настройки поведения</li>
+</ul>
+
+<div class="info">
+<div class="info-title">Множественные профили</div>
+Можно создавать десятки профилей для разных сценариев: рабочий (блокировка отвлекающих сайтов), детский (безопасный поиск), персональный (свои правила). Каждый профиль назначается на отдельный Endpoint.
+</div>
+
+<h2 id="sec2-2">2.2 Фильтры (Filters)</h2>
+
+<p>Фильтры -- это готовые списки блокировки. Обновляются каждые 15 минут.</p>
+
+<h3>Нативные фильтры (Native Filters)</h3>
+<table>
+<thead><tr><th>Фильтр</th><th>Описание</th><th>Режимы</th></tr></thead>
+<tbody>
+<tr><td>Ads & Trackers</td><td>Реклама и трекеры</td><td>Minimal / Balanced / Aggressive</td></tr>
+<tr><td>Malware</td><td>Вредоносные домены</td><td>Relaxed / Balanced / Aggressive</td></tr>
+<tr><td>Phishing</td><td>Фишинговые сайты</td><td>--</td></tr>
+<tr><td>Social</td><td>Социальные сети</td><td>--</td></tr>
+<tr><td>Gambling</td><td>Онлайн-казино, беттинг</td><td>--</td></tr>
+<tr><td>Pornography</td><td>Adult-контент</td><td>--</td></tr>
+<tr><td>Drugs</td><td>Наркотический контент</td><td>--</td></tr>
+<tr><td>VoIP</td><td>IP-телефония</td><td>--</td></tr>
+<tr><td>Torrents</td><td>Торрент-трекеры</td><td>--</td></tr>
+<tr><td>Crypto</td><td>Криптовалютные сайты</td><td>--</td></tr>
+<tr><td>Newly Registered</td><td>Недавно зарегистрированные домены</td><td>--</td></tr>
+<tr><td>Typo Squatting</td><td>Тайпсквоттинг</td><td>--</td></tr>
+<tr><td>IoT Telemetry</td><td>Телеметрия IoT-устройств</td><td>--</td></tr>
+</tbody>
+</table>
+
+<h3>Сторонние фильтры (3rd Party)</h3>
+<p>Более 10 популярных комьюнити-списков: Hagezi, OISD, 1Hosts, StevenBlack и др. Обновляются независимо от Control D, используются на свой страх и риск.</p>
+
+<h2 id="sec2-3">2.3 Сервисы (Services)</h2>
+
+<p>Сервисы -- это готовые коллекции доменов, принадлежащих конкретному сайту или приложению. Например, сервис <code>facebook</code> включает десятки доменов: <code>facebook.com</code>, <code>fbcdn.net</code>, <code>instagram.com</code> и т.д.</p>
+
+<p>Для каждого сервиса можно задать одно из трех действий:</p>
+<table>
+<thead><tr><th>Действие</th><th>Код</th><th>Описание</th></tr></thead>
+<tbody>
+<tr><td>BYPASS</td><td>0</td><td>Разрешить, использовать реальный IP</td></tr>
+<tr><td>BLOCK</td><td>1</td><td>Заблокировать полностью</td></tr>
+<tr><td>REDIRECT</td><td>3</td><td>Перенаправить через прокси (указать локацию, например JFK)</td></tr>
+</tbody>
+</table>
+
+<div class="tip">
+<div class="tip-title">Более 400 сервисов</div>
+Control D поддерживает 400+ сервисов: от Amazon и Netflix до специфических банковских сервисов. Сервисные правила имеют приоритет над фильтрами -- если включен Social Filter (блокирует все соцсети), но для Instagram задан BYPASS -- Instagram будет работать.
+</div>
+
+<h2 id="sec2-4">2.4 Пользовательские правила (Custom Rules)</h2>
+
+<p>Кастомные правила -- базовые строительные блоки Control D. Позволяют создавать правила для конкретных доменов с поддержкой wildcard (<code>*.example.com</code>). Лимит: до 10,000 правил на профиль.</p>
+
+<p>Типы правил:</p>
+<ul>
+<li><strong>Block</strong> -- домен не загрузится</li>
+<li><strong>Bypass</strong> -- игнорировать фильтры, вернуть реальный IP</li>
+<li><strong>Redirect</strong> -- подменить IP или проксировать через выбранную локацию</li>
+</ul>
+
+<div class="info">
+<div class="info-title">Приватные домены</div>
+Для создания приватных доменов (например, для Active Directory) используйте Redirect с указанием IP или hostname вместо прокси. Это позволяет использовать Control D как основной DNS в корпоративной среде.
+</div>
+
+<h2 id="sec2-5">2.5 Гео-правила (Geo Custom Rules)</h2>
+
+<p>Geo Custom Rules используют геолокацию IP-адреса источника или назначения для принятия решений.</p>
+
+<h3>Формат правил</h3>
+<table>
+<thead><tr><th>Префикс</th><th>Значение</th><th>Пример</th></tr></thead>
+<tbody>
+<tr><td><code>@XX</code></td><td>Страна назначения</td><td><code>@CN</code> -- сайт хостится в Китае</td></tr>
+<tr><td><code>!@XX</code></td><td>НЕ страна назначения</td><td><code>!@US</code> -- сайт НЕ в США</td></tr>
+<tr><td><code>@ASxxxxx</code></td><td>ASN назначения</td><td><code>@AS16509</code> -- Amazon</td></tr>
+<tr><td><code>#XX</code></td><td>Страна источника</td><td><code>#CA</code> -- запрос из Канады</td></tr>
+<tr><td><code>!#XX</code></td><td>НЕ страна источника</td><td><code>!#DE</code> -- запрос НЕ из Германии</td></tr>
+</tbody>
+</table>
+
+<div class="warning">
+<div class="warning-title">Важное ограничение</div>
+Не смешивайте разные действия (Block, Bypass, Redirect) для "not-правил" (с !), иначе поведение будет непредсказуемым. Все not-правила одного типа должны иметь одно и то же действие.
+</div>
+
+<h2 id="sec2-6">2.6 Правило по умолчанию (Default Rule)</h2>
+
+<p>Специальное правило-ловушка, которое срабатывает, когда ни одно другое правило не подошло.</p>
+
+<table>
+<thead><tr><th>Действие</th><th>Результат</th><th>Когда использовать</th></tr></thead>
+<tbody>
+<tr><td>Bypass</td><td>Разрешить всё (по умолчанию)</td><td>Стандартный режим -- блокируется только то, что явно указано</td></tr>
+<tr><td>Block</td><td>Блокировать всё</td><td>Whitelist-режим -- работает только то, что явно разрешено</td></tr>
+<tr><td>Redirect</td><td>Перенаправлять всё через прокси</td><td>Все запросы идут через выбранную локацию (например, JFK)</td></tr>
+</tbody>
+</table>
+
+<div class="danger">
+<div class="danger-title">Осторожно с Redirect</div>
+Перенаправление всего трафика может сломать SSH, игры, VoIP-приложения и некоторые мессенджеры. Используйте с осторожностью и настраивайте bypass для проблемных сервисов.
+</div>
+
+<!-- ===== SECTION 3 ===== -->
+<h1 id="sec3">3. Настройка и развертывание</h1>
+
+<h2 id="sec3-1">3.1 Создание Endpoint</h2>
+
+<p>Endpoint -- это уникальный DNS-резолвер, который применяет профиль. Каждый Endpoint получает:</p>
+<ul>
+<li>Уникальный ID резолвера</li>
+<li>Адреса DoH / DoT / DoQUIC</li>
+<li>Legacy DNS (IPv4/IPv6) -- опционально</li>
+</ul>
+
+<p class="step-list">
+<span class="step-num">1</span> В панели управления перейдите в раздел <strong>Endpoints</strong><br>
+<span class="step-num">2</span> Нажмите зеленую кнопку <strong>+</strong><br>
+<span class="step-num">3</span> Выберите тип устройства и операционную систему<br>
+<span class="step-num">4</span> Настройте параметры Endpoint (уровень аналитики, IP-авторизацию и т.д.)<br>
+<span class="step-num">5</span> Нажмите <strong>Create</strong> -- будут сгенерированы уникальные DNS-адреса
+</p>
+
+<h2 id="sec3-2">3.2 DNS-протоколы</h2>
+
+<table>
+<thead><tr><th>Протокол</th><th>Порт</th><th>Безопасность</th><th>Поддержка</th></tr></thead>
+<tbody>
+<tr><td>Legacy DNS (UDP 53)</td><td>53</td><td>Низкая</td><td>Все устройства</td></tr>
+<tr><td>DNS-over-HTTPS (DoH)</td><td>443</td><td>Высокая</td><td>Современные ОС</td></tr>
+<tr><td>DNS-over-TLS (DoT)</td><td>853</td><td>Высокая</td><td>Современные ОС</td></tr>
+<tr><td>DNS-over-QUIC (DoQ)</td><td>853/QUIC</td><td>Высокая</td><td>Экспериментальный</td></tr>
+</tbody>
+</table>
+
+<div class="tip">
+<div class="tip-title">Рекомендация</div>
+Используйте DoH или DoT для шифрования DNS-запросов. Legacy DNS не шифруется и может быть перехвачен или подменен провайдером.
+</div>
+
+<h2 id="sec3-3">3.3 Платформы и установка</h2>
+
+<p>Control D поддерживает практически любую платформу:</p>
+
+<table>
+<thead><tr><th>Платформа</th><th>Метод установки</th><th>Требует ПО</th></tr></thead>
+<tbody>
+<tr><td>Windows 11</td><td>Нативная настройка DoH/DoT</td><td>Нет</td></tr>
+<tr><td>Windows 10</td><td>GUI Setup Utility или ctrld</td><td>Да</td></tr>
+<tr><td>macOS Big Sur+</td><td>Нативная настройка DoH/DoT</td><td>Нет</td></tr>
+<tr><td>Linux</td><td>ctrld daemon или systemd-resolved</td><td>Да (ctrld)</td></tr>
+<tr><td>iOS 14+</td><td>Нативная настройка DoH/DoT</td><td>Нет</td></tr>
+<tr><td>Android 9+</td><td>Нативная настройка DoT</td><td>Нет</td></tr>
+<tr><td>Роутеры</td><td>ctrld или настройка DNS</td><td>Зависит от модели</td></tr>
+</tbody>
+</table>
+
+<h3>Быстрая установка ctrld</h3>
+<pre><code># Linux / macOS
+sh -c 'sh -c "$(curl -sL https://api.controld.com/dl)" -s RESOLVER_ID_HERE forced'
+
+# Windows PowerShell
+(Invoke-WebRequest -Uri 'https://api.controld.com/dl/ps1' -UseBasicParsing).Content |
+    Set-Content "$env:TEMP\ctrld_install.ps1"
+Invoke-Expression "& '$env:TEMP\ctrld_install.ps1' 'RESOLVER_ID_HERE' 'forced'"</code></pre>
+
+<!-- ===== SECTION 4 ===== -->
+<h1 id="sec4">4. Профильные опции</h1>
+
+<h2 id="sec4-1">4.1 Защита от DNS Rebinding</h2>
+
+<p>Блокирует домены, которые указывают на приватные IP-адреса (RFC1918). Защищает от атак, когда злоумышленник заставляет ваш браузер обращаться к внутренним ресурсам сети.</p>
+
+<table>
+<thead><tr><th>Диапазон</th><th>Описание</th></tr></thead>
+<tbody>
+<tr><td>127.0.0.0/8</td><td>Loopback (localhost)</td></tr>
+<tr><td>10.0.0.0/8</td><td>Приватные адреса Class A</td></tr>
+<tr><td>172.16.0.0/12</td><td>Приватные адреса Class B</td></tr>
+<tr><td>192.168.0.0/16</td><td>Приватные адреса Class C</td></tr>
+<tr><td>169.254.0.0/16</td><td>Link-local</td></tr>
+<tr><td>fd00::/8</td><td>IPv6 Unique Local</td></tr>
+</tbody>
+</table>
+
+<h2 id="sec4-2">4.2 TTL Overrides</h2>
+
+<p>Позволяет переопределить время жизни DNS-записей для оптимизации:</p>
+
+<table>
+<thead><tr><th>Тип TTL</th><th>По умолчанию</th><th>Эффект увеличения</th></tr></thead>
+<tbody>
+<tr><td>Block TTL</td><td>10 сек</td><td>Меньше DNS-запросов для заблокированных доменов</td></tr>
+<tr><td>Redirect TTL</td><td>20 сек</td><td>Меньше запросов для перенаправленных доменов</td></tr>
+<tr><td>Bypass TTL</td><td>Авто</td><td>Меньше запросов вообще, но может ломать CDN</td></tr>
+</tbody>
+</table>
+
+<h2 id="sec4-3">4.3 AI Malware Filter</h2>
+
+<p>ML-модель, которая классифицирует домены как вредоносные даже если их нет в блоклистах. Три режима:</p>
+
+<table>
+<thead><tr><th>Режим</th><th>Агрессивность</th><th>Ложные срабатывания</th></tr></thead>
+<tbody>
+<tr><td>Minimal</td><td>Только высокая уверенность</td><td>Минимум (рекомендуется)</td></tr>
+<tr><td>Standard</td><td>Средняя уверенность</td><td>Умеренное количество</td></tr>
+<tr><td>Aggressive</td><td>Низкая уверенность</td><td>Много (не рекомендуется)</td></tr>
+</tbody>
+</table>
+
+<h2 id="sec4-4">4.4 Safe Search и Restricted YouTube</h2>
+
+<ul>
+<li><strong>Safe Search</strong> -- принудительно включает безопасный поиск в Google, Bing, DuckDuckGo. Поисковики без поддержки блокируются.</li>
+<li><strong>Restricted YouTube</strong> -- включает ограниченный режим YouTube (скрывает взрослый контент и отключает комментарии).</li>
+</ul>
+
+<h2 id="sec4-5">4.5 EDNS Client Subnet</h2>
+
+<p>Определяет, передавать ли подсеть клиента в DNS-запросах:</p>
+
+<table>
+<thead><tr><th>Режим</th><th>Описание</th><th>Приватность</th></tr></thead>
+<tbody>
+<tr><td>Off</td><td>Не передавать ECS</td><td>Максимальная</td></tr>
+<tr><td>Auto</td><td>Использовать подсеть Control D сервера</td><td>Средняя</td></tr>
+<tr><td>Custom</td><td>Указать свою подсеть</td><td>Контролируемая</td></tr>
+</tbody>
+</table>
+
+<!-- ===== SECTION 5 ===== -->
+<h1 id="sec5">5. Приоритет правил</h1>
+
+<p>При совпадении нескольких правил для одного домена применяется правило с наивысшим приоритетом. Иерархия (от высшего к низшему):</p>
+
+<table>
+<thead><tr><th>Приоритет</th><th>Тип правила</th><th>Описание</th></tr></thead>
+<tbody>
+<tr><td>1 (высший)</td><td>Custom Rules</td><td>Гранулярные правила для конкретных доменов</td></tr>
+<tr><td>2</td><td>Services</td><td>Правила для сервисов (400+ готовых)</td></tr>
+<tr><td>3</td><td>Filters</td><td>Категориальные фильтры</td></tr>
+<tr><td>4</td><td>Geo Custom Rules</td><td>Гео-логика</td></tr>
+<tr><td>5</td><td>Default Rule</td><td>Правило по умолчанию (ловушка)</td></tr>
+<tr><td>6 (низший)</td><td>da (default action)</td><td>Действие по умолчанию профиля</td></tr>
+</tbody>
+</table>
+
+<div class="info">
+<div class="info-title">Пример приоритетов</div>
+Если включен Social Filter (блокирует все соцсети), но для сервиса <code>instagram</code> задан BYPASS, а для домена <code>pixel.instagram.com</code> задан BLOCK -- результат:<br>
+<code>pixel.instagram.com</code> будет заблокирован (Custom Rule выигрывает у Service Rule).<br>
+<code>instagram.com</code> будет разрешен (Service BYPASS выигрывает у Filter BLOCK).
+</div>
+
+<!-- ===== SECTION 6 ===== -->
+<h1 id="sec6">6. Аналитика и мониторинг</h1>
+
+<p>Control D предоставляет детальную аналитику DNS-запросов:</p>
+
+<h3>Уровни аналитики</h3>
+<table>
+<thead><tr><th>Уровень</th><th>Что собирается</th><th>Хранение</th></tr></thead>
+<tbody>
+<tr><td>None</td><td>Ничего</td><td>--</td></tr>
+<tr><td>Basic</td><td>Агрегированные данные</td><td>90 дней</td></tr>
+<tr><td>Full</td><td>Каждый запрос: домен, время, протокол, действие, причина</td><td>30 дней</td></tr>
+</tbody>
+</table>
+
+<h3>Разделы аналитики</h3>
+<ul>
+<li><strong>Statistics</strong> -- сводка использования, тренды, топ доменов</li>
+<li><strong>Activity Log</strong> -- точные DNS-запросы с метаданными</li>
+<li><strong>Status Page</strong> -- диагностическая информация: IP, протокол, задержка, авторизация прокси</li>
+</ul>
+
+<div class="warning">
+<div class="warning-title">Приватность данных</div>
+Максимально детальные данные (Full Analytics) хранятся не более 30 дней. Можно выбрать регион хранения (Storage Region). Гранулярные данные включают домен, время, протокол, DNS return code, тип записи, действие и причину.
+</div>
+
+<!-- ===== SECTION 7 ===== -->
+<h1 id="sec7">7. Преимущества и ограничения</h1>
+
+<h2 id="sec7-1">7.1 Преимущества</h2>
+
+<table>
+<thead><tr><th>Преимущество</th><th>Описание</th></tr></thead>
+<tbody>
+<tr><td>Не требует ПО</td><td>Современные ОС поддерживают DoH/DoT нативно</td></tr>
+<tr><td>100+ локаций прокси</td><td>Маскировка IP под любой город мира</td></tr>
+<tr><td>ML-защита</td><td>AI-модель блокирует угрозы в реальном времени</td></tr>
+<tr><td>Гранулярный контроль</td><td>Правила для доменов, сервисов, стран, ASN</td></tr>
+<tr><td>Бесплатные резолверы</td><td>Базовая фильтрация без регистрации</td></tr>
+<tr><td>Open Source клиент</td><td>ctrld доступен на GitHub, сообщество поддерживает</td></tr>
+<tr><td>Массовое развертывание</td><td>RMM/MDM интеграция для бизнеса</td></tr>
+<tr><td>Обновление фильтров</td><td>Каждые 15 минут, актуальные блоклисты</td></tr>
+</tbody>
+</table>
+
+<h2 id="sec7-2">7.2 Ограничения</h2>
+
+<table>
+<thead><tr><th>Ограничение</th><th>Описание</th><th>Альтернатива</th></tr></thead>
+<tbody>
+<tr><td>Не блокирует BitTorrent</td><td>Протокол не использует DNS</td><td>Файрвол с DPI</td></tr>
+<tr><td>Не является VPN</td><td>Только DNS + HTTP-проксирование</td><td>WireGuard / OpenVPN</td></tr>
+<tr><td>SNI в plaintext</td><td>Название сайта видно в TLS-рукопожатии</td><td>ESNI / VPN</td></tr>
+<tr><td>Не работает на captive portal</td><td>Страницы авторизации Wi-Fi</td><td>Временно отключить</td></tr>
+<tr><td>iCloud Private Relay</td><td>Apple может обходить Control D</td><td>Отключить Private Relay</td></tr>
+<tr><td>Проблемы с некоторыми играми</td><td>Non-SNI протоколы ломаются через прокси</td><td>Bypass для игр</td></tr>
+</tbody>
+</table>
+
+<!-- ===== SECTION 8 ===== -->
+<h1 id="sec8">8. Практические советы</h1>
+
+<h3>Совет 1: Начните с профиля по умолчанию</h3>
+<p>Default Rule = BYPASS. Включайте фильтры по одному и проверяйте, что не ломается. Так проще откатить проблемное изменение.</p>
+
+<h3>Совет 2: Используйте сервисы вместо ручных доменов</h3>
+<p>Вместо перечисления десятков доменов Facebook используйте готовый сервис <code>facebook</code> -- он включает все необходимые домены и автоматически обновляется.</p>
+
+<h3>Совет 3: Настройте bypass для критичных сервисов</h3>
+<p>Банки, платежные системы, стриминг-сервисы -- лучше оставлять на BYPASS. Они чувствительны к геолокации и могут блокировать вход через прокси.</p>
+
+<h3>Совет 4: Проверяйте Status Page после изменений</h3>
+<p><code>https://controld.com/status</code> покажет: используете ли вы Control D, какой протокол, задержку, авторизован ли прокси.</p>
+
+<h3>Совет 5: Используйте Geo-правила умно</h3>
+<p>Правило <code>!@US -> REDIRECT JFK</code> автоматически перенаправляет весь трафик на сайты, которые не хостятся в США. Это ключ к созданию "американского" профиля.</p>
+
+<h3>Совет 6: Группируйте правила в папки</h3>
+<p>Magic Folders позволяют группировать кастомные правила и применять действия ко всей папке сразу. Удобно для управления большим количеством правил.</p>
+
+<h3>Совет 7: Lock Profile для продуктивности</h3>
+<p>Включайте Profile Lock с паролем, если профиль используется для блокировки отвлекающих сайтов. Это добавляет трения перед изменением правил.</p>
+
+<h3>Совет 8: Мониторьте Activity Log</h3>
+<p>Регулярно проверяйте логи -- вы обнаружите неожиданные запросы от приложений и сможете настроить правила точнее.</p>
+
+<!-- ===== SECTION 9 ===== -->
+<h1 id="sec9">9. Профили для Нью-Йорка</h1>
+
+<h2 id="sec9-1">9.1 Философия JFK-профиля</h2>
+
+<p>JFK-профиль создает иллюзию нахождения в Нью-Йорке (JFK -- код аэропорта). Основной принцип: <strong>весь трафик идет через JFK</strong>, кроме явно прописанных исключений.</p>
+
+<h3>Архитектура профиля</h3>
+
+<table>
+<thead><tr><th>Слой</th><th>Назначение</th><th>Действие</th></tr></thead>
+<tbody>
+<tr><td>Фильтры</td><td>Базовая защита</td><td>Malware + Ads + Typo + IoT -- ON</td></tr>
+<tr><td>Сервисы</td><td>Перенаправление ключевых сервисов</td><td>REDIRECT через JFK</td></tr>
+<tr><td>Кастомные домены</td><td>Точечные правила для доменов</td><td>REDIRECT/BYPASS/BLOCK</td></tr>
+<tr><td>Geo-правила</td><td>Автоматический редирект не-US трафика</td><td>!@US -> REDIRECT JFK</td></tr>
+<tr><td>Default Rule</td><td>Всё остальное</td><td>REDIRECT через JFK</td></tr>
+</tbody>
+</table>
+
+<h2 id="sec9-2">9.2 Структура JSON-профиля</h2>
+
+<p>Профиль Control D хранится в JSON-формате с следующей структурой:</p>
+
+<pre><code>{
+  "name": "Название профиля",
+  "profile": {
+    "flt": {          // Фильтры
+      "ads": { "do": 0, "status": 1, "lvl": "ads_medium" },
+      "malware": { "do": 0, "status": 1 }
+    },
+    "cflt": [],       // Кастомные фильтры
+    "ipflt": {        // IP-фильтры
+      "ip_malware": { "do": 0, "status": 1 }
+    },
+    "rule": [         // Доменные правила (Custom Rules)
+      {
+        "PK": "domain.com",
+        "order": 37,
+        "group": 3,
+        "action": { "do": 3, "status": 1, "via": "JFK" }
+      }
+    ],
+    "geo_custom_rules": [  // Гео-правила
+      {
+        "id": "geo_not_us",
+        "order": 3,
+        "condition": { "country_not": ["US"] },
+        "action": { "do": 3, "status": 1, "via": "JFK" }
+      }
+    ],
+    "svc": {          // Сервисные правила
+      "google": { "type": "svc", "action": { "do": 3, "status": 1, "via": "JFK" } }
+    },
+    "grp": [          // Группы
+      {
+        "PK": 6,
+        "group": "Geo Custom Rules",
+        "action": { "status": 1, "do": 3, "via": "JFK" }
+      }
+    ],
+    "da": { "do": 1, "status": 1 }  // Default Action
+  }
+}</code></pre>
+
+<h3>Коды действий (do)</h3>
+<table>
+<thead><tr><th>Код</th><th>Действие</th><th>Описание</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>Allow / Bypass</td><td>Разрешить, использовать авторитативный DNS</td></tr>
+<tr><td>1</td><td>Block</td><td>Заблокировать</td></tr>
+<tr><td>2</td><td>Do Not Log</td><td>Не логировать (без блокировки)</td></tr>
+<tr><td>3</td><td>Redirect</td><td>Перенаправить через прокси (via: JFK)</td></tr>
+</tbody>
+</table>
+
+<h2 id="sec9-3">9.3 Готовый профиль NY-GCR</h2>
+
+<p>Ниже описан полный профиль для маскировки под Нью-Йорк. Файлы профилей включены отдельно.</p>
+
+<h3>Фильтры (включены)</h3>
+<ul>
+<li>Malware -- блокировка вредоносных доменов</li>
+<li>Ads & Trackers -- блокировка рекламы (medium)</li>
+<li>Typo Squatting -- защита от тайпсквоттинга</li>
+<li>IoT Telemetry -- блокировка телеметрии</li>
+<li>Hagezi Pro++ -- расширенный блоклист</li>
+<li>OISD -- базовый блоклист</li>
+</ul>
+
+<h3>Сервисы (REDIRECT через JFK)</h3>
+<p>Более 60 ключевых сервисов перенаправляются через JFK: Google, YouTube, Instagram, Facebook, WhatsApp, Telegram, Claude, ChatGPT, Bing, Microsoft, PayPal, Spotify, Amazon, AWS, Cloudflare и многие другие.</p>
+
+<h3>Исключения (BYPASS)</h3>
+<p>Следующие сервисы оставлены в обход для совместимости:</p>
+<ul>
+<li>VPN-сервисы (Windscribe, AdGuard VPN) -- нужны для дополнительной защиты</li>
+<li>Некоторые китайские сервисы -- для доступа к региональному контенту</li>
+</ul>
+
+<h3>Кастомные доменные правила</h3>
+<p>Дополнительные правила для доменов Meta, Google API, Instagram analytics и других:</p>
+<ul>
+<li>lookaside.facebook.com -> REDIRECT JFK</li>
+<li>graph.instagram.com -> REDIRECT JFK</li>
+<li>*.fbcdn.net -> REDIRECT JFK</li>
+<li>*.meta.com -> REDIRECT JFK</li>
+<li>geolocation.googleapis.com -> BYPASS</li>
+</ul>
+
+<h3>Geo-правило</h3>
+<pre><code>IF страна назначения != "US" THEN REDIRECT через JFK</code></pre>
+<p>Это автоматически перенаправляет весь трафик на сайты, хостящиеся за пределами США, через Нью-Йоркский прокси.</p>
+
+<h3>Default Rule</h3>
+<pre><code>universal-all -> REDIRECT через JFK</code></pre>
+<p>Все, что не попало в предыдущие правила, автоматически перенаправляется через JFK.</p>
+
+<h2 id="sec9-4">9.4 Скрипты автоматизации</h2>
+
+<h3>Скрипт установки на Linux/macOS</h3>
+<pre><code>#!/bin/bash
+# Control D JFK Profile Setup Script
+# Устанавливает ctrld с профилем NY-GCR
+
+RESOLVER_ID="YOUR_RESOLVER_ID"
+
+echo "[+] Installing Control D ctrld..."
+sh -c "sh -c '\"\$(curl -sL https://api.controld.com/dl)\"' -s \$RESOLVER_ID forced"
+
+echo "[+] Verifying installation..."
+sudo ctrld status
+
+echo "[+] Checking DNS..."
+dig +short test.controld.com
+
+echo "[+] Done! Verify at: https://controld.com/status"</code></pre>
+
+<h3>Скрипт установки на Windows</h3>
+<pre><code># Control D JFK Profile Setup - Windows PowerShell
+$RESOLVER_ID = "YOUR_RESOLVER_ID"
+
+Write-Host "[+] Installing Control D ctrld..." -ForegroundColor Green
+(Invoke-WebRequest -Uri 'https://api.controld.com/dl/ps1' -UseBasicParsing).Content |
+    Set-Content "$env:TEMP\ctrld_install.ps1"
+Invoke-Expression "& '$env:TEMP\ctrld_install.ps1' '$RESOLVER_ID' 'forced'"
+
+Write-Host "[+] Verifying..." -ForegroundColor Green
+ctrld status
+
+Write-Host "[+] Done! Check: https://controld.com/status" -ForegroundColor Green</code></pre>
+
+<h3>Скрипт проверки работы</h3>
+<pre><code>#!/bin/bash
+# Verify JFK profile is working
+
+echo "=== DNS Test ==="
+dig +short @76.76.2.0 whoami.controld.com
+
+echo "=== IP Geolocation ==="
+curl -s ipinfo.io | grep -E '"city"|"region"|"country"'
+
+echo "=== Control D Status ==="
+curl -s https://controld.com/status | head -20
+
+echo "=== Latency Test ==="
+ping -c 3 dns.controld.com</code></pre>
+
+<!-- ===== SECTION 10 ===== -->
+<h1 id="sec10">10. Заключение</h1>
+
+<p>Control D -- это мощный инструмент для управления DNS-трафиком, который выходит далеко за рамки обычного DNS-резолвера. Ключевые преимущества:</p>
+
+<ul>
+<li><strong>Гранулярный контроль</strong> -- правила на уровне доменов, сервисов, стран и ASN</li>
+<li><strong>Прозрачное проксирование</strong> -- маскировка IP через 100+ локаций без VPN</li>
+<li><strong>ML-защита</strong> -- блокировка угроз в реальном времени</li>
+<li><strong>Никакого софта</strong> -- работает через нативные DoH/DoT в современных ОС</li>
+<li><strong>Бесплатный уровень</strong> -- базовая фильтрация без регистрации</li>
+</ul>
+
+<p>JFK-профиль, описанный в этом гайде, создает полную иллюзию нахождения в Нью-Йорке: все DNS-запросы разрешаются через американскую инфраструктуру, трафик выходит через JFK-прокси, geo-правила автоматически перенаправляют не-US трафик. Это эффективное решение для тех, кому нужна американская цифровая идентичность.</p>
+
+<div class="info">
+<div class="info-title">Полезные ресурсы</div>
+<ul>
+<li>Документация: <a href="https://docs.controld.com">docs.controld.com</a></li>
+<li>Панель управления: <a href="https://controld.com/dashboard">controld.com/dashboard</a></li>
+<li>GitHub (ctrld): <a href="https://github.com/Control-D-Inc/ctrld">github.com/Control-D-Inc/ctrld</a></li>
+<li>Статус страница: <a href="https://controld.com/status">controld.com/status</a></li>
+</ul>
+</div>
+
+</body>
+</html>

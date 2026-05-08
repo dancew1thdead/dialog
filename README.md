@@ -1,13 +1,13 @@
-# 🎛️ Control D - NY-GCR Profile Package
+# Control D - NY-NY ULTIMATE Package (JFK Cloaking)
 
 ## What's Included
 
 | File | Description |
 |------|-------------|
-| `docs/controld-guide.html` | Beautiful interactive HTML guide |
-| `profiles/NY-GCR-Profile.json` | JFK cloaking profile configuration |
-| `scripts/install-linux-mac.sh` | Installation script for Linux/macOS |
-| `scripts/install-windows.ps1` | Installation script for Windows |
+| `Control-D-Guide.pdf` | Complete Control D guide (Russian, 22 pages) |
+| `profiles/NY-GCR-Ultimate.json` | Ultimate JFK cloaking profile (v4.0) |
+| `scripts/install-ny.sh` | One-click NY-NY Ultimate setup script |
+| `controld-guide.html` | Interactive Russian guide |
 
 ---
 
@@ -19,16 +19,12 @@
 2. Create a new Endpoint (or use existing one)
 3. Copy the **Resolver ID** from the endpoint settings
 
-### 2. Install Control D
+### 2. Install Control D (Ultimate NY Setup)
 
 **Linux / macOS:**
 ```bash
-sudo bash scripts/install-linux-mac.sh YOUR_RESOLVER_ID
-```
-
-**Windows (PowerShell as Admin):**
-```powershell
-.\scripts\install-windows.ps1 -ResolverId "YOUR_RESOLVER_ID"
+sudo chmod +x scripts/install-ny.sh
+sudo ./scripts/install-ny.sh YOUR_RESOLVER_ID
 ```
 
 ### 3. Import the Profile
@@ -36,46 +32,48 @@ sudo bash scripts/install-linux-mac.sh YOUR_RESOLVER_ID
 1. Go to [controld.com/dashboard](https://controld.com/dashboard)
 2. Navigate to **Profiles** section
 3. Click **Import Profile**
-4. Select `profiles/NY-GCR-Profile.json`
+4. Select `profiles/NY-GCR-Ultimate.json`
 5. Assign the profile to your Endpoint
 
 ### 4. Verify
 
-Open in browser: https://controld.com/status
+Check in browser: https://controld.com/status
+Or run: `curl https://ipinfo.io`
 
 ---
 
-## Profile Architecture
+## Profile Architecture (v4.0)
 
 ```
 Traffic Flow:
-[Your Device] → [Control D DNS] → [JFK Proxy] → [Destination]
+[Your Device] -> [Control D DNS] -> [JFK Proxy (NYC)] -> [Destination]
 
 Rules Priority (highest first):
-1. Custom Rules (specific domains)
-2. Service Rules (400+ services)
-3. Filters (category-based)
-4. Geo Custom Rules (country-based)
-5. Default Rule (catch-all)
+1. Custom Rules (Privacy & Verification)
+2. Service Rules (100+ services forced to JFK)
+3. Filters (Strict Ads, Malware, Tracking, IoT)
+4. Geo Custom Rules (Non-US -> JFK)
+5. Default Rule (Catch-all -> JFK)
 ```
 
 ### Key Features
 
-- **60+ services** redirected through JFK (NYC)
-- **Geo Rule**: All non-US destinations auto-redirect to JFK
-- **Default Rule**: Everything through JFK
-- **Filters**: Malware, Ads (medium), Typo-squatting, IoT telemetry
-- **Bypassed**: VPN services, some analytics for compatibility
+- **100% Traffic** redirected through JFK (NYC)
+- **Zero Traces**: Logging disabled, analytics/tracking blocked
+- **Maximum Privacy**: Strict ad-blocking and malware protection
+- **Global Geo-Rule**: All non-US traffic forced through JFK
+- **No Bypasses**: Even VPN and analytics services are proxied for total anonymity
 
 ---
 
 ## Resources
 
-- 📚 [Control D Documentation](https://docs.controld.com)
-- 🎛️ [Control D Dashboard](https://controld.com/dashboard)
-- 💻 [ctrld GitHub](https://github.com/Control-D-Inc/ctrld)
-- 📊 [Status Page](https://controld.com/status)
+- [Control D Documentation](https://docs.controld.com)
+- [Control D Dashboard](https://controld.com/dashboard)
+- [ctrld GitHub](https://github.com/Control-D-Inc/ctrld)
+- [Status Page](https://controld.com/status)
 
 ---
 
-*Version 3.0 | Last updated: 2025-05-08*
+*Profile version: 4.0 | Last updated: 2026-05-07*
+*Created by Manus AI for родной*
