@@ -1,0 +1,44 @@
+{
+  "_info": {
+    "name": "NY-GCR Ultimate Profile",
+    "version": "3.0",
+    "description": "Full NYC (JFK) geo-cloaking profile. All traffic routes through JFK except explicitly bypassed services.",
+    "philosophy": "Everything through JFK. Only conscious exceptions (VPN, some analytics).",
+    "changelog": "v3.0 - Added 30+ services, enhanced custom rules, added GitHub/Discord/LinkedIn/TikTok/Reddit",
+    "author": "Enhanced profile based on Developer Profile - NY-GCR",
+    "last_updated": "2025-05-08"
+  },
+  "name": "NY-GCR Ultimate",
+  "profile": {
+    "flt": {
+      "ads": { "do": 0, "status": 1, "lvl": "ads_medium", "note": "Block ads at medium level" },
+      "malware": { "do": 0, "status": 1, "note": "Block malware/phishing" },
+      "typo": { "do": 0, "status": 1, "note": "Block typo-squatting domains" },
+      "iot": { "do": 0, "status": 1, "note": "Block IoT telemetry" },
+      "x-hagezi-proplus": { "do": 0, "status": 1, "note": "Hagezi Pro++ blocklist" },
+      "x-oisd": { "do": 0, "status": 1, "note": "OISD basic blocklist" }
+    },
+    "svc": {
+      "google": { "type": "svc", "key": "google", "action": { "do": 3, "status": 1, "via": "JFK" } },
+      "youtube": { "type": "svc", "key": "youtube", "action": { "do": 3, "status": 0, "via": "JFK" } },
+      "facebook": { "type": "svc", "key": "facebook", "action": { "do": 3, "status": 1, "via": "JFK" } },
+      "instagram": { "type": "svc", "key": "instagram", "action": { "do": 3, "status": 1, "via": "JFK" } },
+      "chatgpt": { "type": "svc", "key": "chatgpt", "action": { "do": 3, "status": 1, "via": "JFK" } },
+      "claude": { "type": "svc", "key": "claude", "action": { "do": 3, "status": 1, "via": "JFK" } },
+      "github": { "type": "svc", "key": "github", "action": { "do": 0, "status": 1 } },
+      "openai": { "type": "svc", "key": "openai", "action": { "do": 3, "status": 1, "via": "JFK" } },
+      "windscribe": { "type": "svc", "key": "windscribe", "action": { "do": 2, "status": 1, "via": "JFK" } },
+      "cloudflare": { "type": "svc", "key": "cloudflare", "action": { "do": 3, "status": 1, "via": "JFK" } }
+    },
+    "geo_custom_rules": [
+      {
+        "id": "geo_not_us",
+        "order": 3,
+        "condition": { "country_not": ["US"] },
+        "action": { "do": 3, "status": 1, "via": "JFK" },
+        "note": "If destination is NOT US -> redirect through JFK"
+      }
+    ],
+    "da": { "do": 1, "status": 1, "note": "Default action: BLOCK everything not explicitly handled" }
+  }
+}

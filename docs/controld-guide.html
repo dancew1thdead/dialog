@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Control D: Полный гайд</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<style>
+/* ===== MODERN DARK THEME ===== */
+:root {
+  --primary: #00d4ff;
+  --primary-dark: #0099cc;
+  --secondary: #1f2937;
+  --bg-dark: #0f172a;
+  --bg-card: #1e293b;
+  --text-light: #e2e8f0;
+  --text-muted: #94a3b8;
+  --accent-blue: #3b82f6;
+  --accent-green: #10b981;
+  --accent-orange: #f97316;
+  --accent-red: #ef4444;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, var(--bg-dark) 0%, #1a2a3a 100%);
+  color: var(--text-light);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-card); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
+
+/* ===== HEADER ===== */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+  z-index: 1000;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary) 0%, #00ffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ===== MAIN CONTENT ===== */
+main { margin-top: 80px; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border-radius: 20px;
+  margin-bottom: 4rem;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  animation: slideDown 0.6s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary) 0%, #00ffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+
+/* ===== SECTIONS ===== */
+section {
+  margin: 4rem 0;
+  padding: 2rem;
+  border-radius: 15px;
+  background: var(--bg-card);
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+section:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 212, 255, 0.3);
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--primary);
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+h2::before {
+  content: '';
+  width: 4px;
+  height: 2rem;
+  background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+  border-radius: 2px;
+}
+
+h3 {
+  font-size: 1.4rem;
+  margin: 1.5rem 0 0.8rem 0;
+  color: var(--primary);
+}
+
+h4 {
+  font-size: 1.1rem;
+  margin: 1rem 0 0.5rem 0;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+/* ===== CARDS GRID ===== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.card {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.6) 100%);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--primary);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+}
+
+.card:hover::before {
+  top: -25%;
+  right: -25%;
+}
+
+.card h4 {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0.8rem;
+}
+
+.card p {
+  position: relative;
+  z-index: 1;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ===== TABLES ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+thead {
+  background: linear-gradient(90deg, rgba(0, 212, 255, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
+  border-bottom: 2px solid var(--primary);
+}
+
+th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+  color: var(--text-muted);
+}
+
+tbody tr:hover {
+  background: rgba(0, 212, 255, 0.05);
+}
+
+/* ===== CODE BLOCKS ===== */
+pre {
+  background: var(--secondary);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 8px;
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  line-height: 1.5;
+}
+
+code {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  color: inherit;
+}
+
+.hljs { background: var(--secondary) !important; }
+.hljs-string { color: #10b981 !important; }
+.hljs-literal { color: #f97316 !important; }
+.hljs-number { color: #3b82f6 !important; }
+.hljs-attr { color: #00d4ff !important; }
+
+/* ===== CALLOUTS ===== */
+.callout {
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  border-left: 4px solid;
+  position: relative;
+  overflow: hidden;
+}
+
+.callout::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.callout-content {
+  position: relative;
+  z-index: 1;
+}
+
+.callout-title {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.callout-info {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(30, 41, 59, 0.6) 100%);
+  border-left-color: var(--accent-blue);
+}
+
+.callout-info .callout-title { color: var(--accent-blue); }
+.callout-info { color: var(--text-muted); }
+
+.callout-success {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(30, 41, 59, 0.6) 100%);
+  border-left-color: var(--accent-green);
+}
+
+.callout-success .callout-title { color: var(--accent-green); }
+
+.callout-warning {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(30, 41, 59, 0.6) 100%);
+  border-left-color: var(--accent-orange);
+}
+
+.callout-warning .callout-title { color: var(--accent-orange); }
+
+.callout-danger {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(30, 41, 59, 0.6) 100%);
+  border-left-color: var(--accent-red);
+}
+
+.callout-danger .callout-title { color: var(--accent-red); }
+
+/* ===== LISTS ===== */
+ul, ol {
+  margin: 1.5rem 0 1.5rem 2rem;
+}
+
+li {
+  margin-bottom: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+ul li::marker {
+  color: var(--primary);
+}
+
+ol li::marker {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent-blue) 100%);
+  color: var(--bg-dark);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0, 212, 255, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 212, 255, 0.1);
+}
+
+/* ===== TAGS ===== */
+.tag {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(59, 130, 246, 0.1));
+  color: var(--primary);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ===== TOC ===== */
+.toc {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.6) 100%);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  position: sticky;
+  top: 100px;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+}
+
+.toc h3 {
+  color: var(--primary);
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc li {
+  margin: 0.4rem 0;
+}
+
+.toc a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+.toc a:hover {
+  color: var(--primary);
+  padding-left: 1rem;
+  background: rgba(0, 212, 255, 0.05);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid rgba(0, 212, 255, 0.1);
+  margin-top: 4rem;
+  color: var(--text-muted);
+}
+
+footer p {
+  margin: 0.5rem 0;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #00ffff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  header { flex-direction: column; gap: 1rem; }
+  .nav-links { gap: 1rem; font-size: 0.8rem; }
+  .hero h1 { font-size: 2.5rem; }
+  h2 { font-size: 1.8rem; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .toc { position: relative; top: auto; margin: 2rem 0; }
+  table { font-size: 0.9rem; }
+  th, td { padding: 0.8rem 0.5rem; }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
+  50% { text-shadow: 0 0 20px rgba(0, 212, 255, 0.8); }
+}
+
+.glow-text { animation: glow 3s ease-in-out infinite; }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="logo">Control D</div>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#intro">Введение</a></li>
+      <li><a href="#components">Компоненты</a></li>
+      <li><a href="#setup">Настройка</a></li>
+      <li><a href="#profiles">Профили</a></li>
+      <li><a href="#docs">Документация</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main>
+  <div class="container">
+    
+    <!-- HERO -->
+    <section class="hero">
+      <h1>🎛️ Control D</h1>
+      <p>Полный гайд по настраиваемому DNS-резолверу и фильтрации трафика</p>
+      <p style="font-size: 1rem; margin-top: 2rem;">
+        <span class="tag">DNS Routing</span>
+        <span class="tag">Geo-Masking</span>
+        <span class="tag">Privacy</span>
+        <span class="tag">Filtering</span>
+      </p>
+    </section>
+
+    <!-- INTRO SECTION -->
+    <section id="intro">
+      <h2>Введение в Control D</h2>
+      
+      <p><strong>Control D</strong> — это настраиваемый DNS-резолвер и платформа фильтрации трафика, которая позволяет управлять интернет-соединением на уровне DNS-запросов. В отличие от обычных DNS-серверов, Control D дает гранулярный контроль над тем, какие домены разрешаются, блокируются или перенаправляются.</p>
+      
+      <div class="callout callout-info">
+        <div class="callout-content">
+          <div class="callout-title">💡 Ключевая идея</div>
+          <p>Control D — это DNS-сервис, который можно настроить под свои нужды: блокировать рекламу, защищать от вредоносных сайтов, перенаправлять трафик через прокси в 100+ локациях.</p>
+        </div>
+      </div>
+
+      <h3>Что такое DNS?</h3>
+      <p><strong>DNS (Domain Name System)</strong> — это система, которая преобразует человекочитаемые доменные имена (например, <code>google.com</code>) в IP-адреса (например, <code>142.250.80.46</code>). Работает как телефонная книга интернета:</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Этап</th>
+            <th>Описание</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Запрос пользователя</td>
+            <td>Вводите <code>example.com</code> в браузере</td>
+          </tr>
+          <tr>
+            <td>DNS-резолвер</td>
+            <td>Ваше устройство отправляет запрос к DNS-серверу</td>
+          </tr>
+          <tr>
+            <td>Обработка</td>
+            <td>DNS-провайдер обрабатывает запрос (ISP, Google, Cloudflare, Control D)</td>
+          </tr>
+          <tr>
+            <td>Ответ</td>
+            <td>Возвращается IP-адрес запрашиваемого домена</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Как работает Control D?</h3>
+      <p>Control D предоставляет уникальные DNS-резолверы, которые могут манипулировать ответами на основе заданных правил:</p>
+      
+      <div class="cards-grid">
+        <div class="card">
+          <h4>1️⃣ Резолюция</h4>
+          <p>По умолчанию Control D работает как обычный DNS-резолвер — разрешает домены в IP-адреса.</p>
+        </div>
+        <div class="card">
+          <h4>2️⃣ Правила</h4>
+          <p>Когда вы настраиваете фильтры, сервисы и кастомные правила, Control D начинает перехватывать DNS-запросы.</p>
+        </div>
+        <div class="card">
+          <h4>3️⃣ Действия</h4>
+          <p>Для каждого запроса применяется одно из действий: BYPASS, BLOCK или REDIRECT.</p>
+        </div>
+      </div>
+
+      <h3>Ключевые возможности</h3>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Возможность</th>
+            <th>Описание</th>
+            <th>Практическое применение</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Фильтрация</td>
+            <td>Блокировка 20+ категорий + сторонние списки</td>
+            <td>Блокировка рекламы, трекеров, вредоносных доменов</td>
+          </tr>
+          <tr>
+            <td>Перенаправление трафика</td>
+            <td>Проксирование через 100+ локаций</td>
+            <td>Маскировка геолокации, обход блокировок</td>
+          </tr>
+          <tr>
+            <td>Защита от вредоносного ПО</td>
+            <td>ML-модель + threat intel feeds</td>
+            <td>Блокировка фишинга, malware в реальном времени</td>
+          </tr>
+          <tr>
+            <td>400+ сервисов</td>
+            <td>Готовые правила для популярных сайтов</td>
+            <td>Быстрая настройка без ручного перечисления доменов</td>
+          </tr>
+          <tr>
+            <td>Гео-правила</td>
+            <td>Правила на основе страны назначения</td>
+            <td>Автоматический редирект если сайт не в US</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- COMPONENTS SECTION -->
+    <section id="components">
+      <h2>Основные компоненты</h2>
+      
+      <h3>Профили (Profiles)</h3>
+      <p><strong>Профиль</strong> — это набор правил и настроек, которые применяются к Endpoint. Каждый профиль содержит фильтры, правила для сервисов, кастомные правила и опции поведения.</p>
+      
+      <div class="callout callout-info">
+        <div class="callout-content">
+          <div class="callout-title">ℹ️ Множественные профили</div>
+          <p>Можно создавать десятки профилей для разных сценариев: рабочий (блокировка отвлекающих сайтов), детский (безопасный поиск), персональный (свои правила).</p>
+        </div>
+      </div>
+
+      <h3>Фильтры (Filters)</h3>
+      <p>Фильтры — это готовые списки блокировки, которые обновляются каждые 15 минут:</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Фильтр</th>
+            <th>Описание</th>
+            <th>Режимы</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ads & Trackers</td>
+            <td>Реклама и трекеры</td>
+            <td>Minimal / Balanced / Aggressive</td>
+          </tr>
+          <tr>
+            <td>Malware</td>
+            <td>Вредоносные домены</td>
+            <td>Relaxed / Balanced / Aggressive</td>
+          </tr>
+          <tr>
+            <td>Phishing</td>
+            <td>Фишинговые сайты</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Social</td>
+            <td>Социальные сети</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Typo Squatting</td>
+            <td>Защита от тайпсквоттинга</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>IoT Telemetry</td>
+            <td>Телеметрия IoT-устройств</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Сервисы (Services)</h3>
+      <p>Сервисы — это готовые коллекции доменов, принадлежащих конкретному сайту или приложению. Например, сервис <code>facebook</code> включает десятки доменов: <code>facebook.com</code>, <code>fbcdn.net</code>, <code>instagram.com</code>.</p>
+      
+      <p>Для каждого сервиса можно задать одно из трех действий:</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Действие</th>
+            <th>Код</th>
+            <th>Описание</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag">BYPASS</span></td>
+            <td>0</td>
+            <td>Разрешить, использовать реальный IP</td>
+          </tr>
+          <tr>
+            <td><span class="tag">BLOCK</span></td>
+            <td>1</td>
+            <td>Заблокировать полностью</td>
+          </tr>
+          <tr>
+            <td><span class="tag">REDIRECT</span></td>
+            <td>3</td>
+            <td>Перенаправить через прокси (указать локацию)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-success">
+        <div class="callout-content">
+          <div class="callout-title">✅ Более 400 сервисов</div>
+          <p>Control D поддерживает 400+ сервисов: от Amazon и Netflix до специфических банковских сервисов. Сервисные правила имеют приоритет над фильтрами.</p>
+        </div>
+      </div>
+
+      <h3>Приоритет правил</h3>
+      <p>При совпадении нескольких правил для одного домена применяется правило с наивысшим приоритетом:</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Приоритет</th>
+            <th>Тип правила</th>
+            <th>Описание</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1 (выше всех)</td>
+            <td>Custom Rules</td>
+            <td>Гранулярные правила для конкретных доменов</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Services</td>
+            <td>Правила для сервисов (400+ готовых)</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Filters</td>
+            <td>Категориальные фильтры</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Geo Custom Rules</td>
+            <td>Гео-логика</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Default Rule</td>
+            <td>Правило по умолчанию (ловушка)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SETUP SECTION -->
+    <section id="setup">
+      <h2>Настройка и развертывание</h2>
+      
+      <h3>DNS-протоколы</h3>
+      <p>Control D поддерживает различные DNS-протоколы для безопасной передачи запросов:</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Протокол</th>
+            <th>Порт</th>
+            <th>Безопасность</th>
+            <th>Поддержка</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Legacy DNS (UDP 53)</td>
+            <td>53</td>
+            <td>Низкая</td>
+            <td>Все устройства</td>
+          </tr>
+          <tr>
+            <td>DNS-over-HTTPS (DoH)</td>
+            <td>443</td>
+            <td>Высокая</td>
+            <td>Современные ОС</td>
+          </tr>
+          <tr>
+            <td>DNS-over-TLS (DoT)</td>
+            <td>853</td>
+            <td>Высокая</td>
+            <td>Современные ОС</td>
+          </tr>
+          <tr>
+            <td>DNS-over-QUIC (DoQ)</td>
+            <td>853/QUIC</td>
+            <td>Высокая</td>
+            <td>Экспериментальный</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-warning">
+        <div class="callout-content">
+          <div class="callout-title">⚠️ Рекомендация</div>
+          <p>Используйте DoH или DoT для шифрования DNS-запросов. Legacy DNS не шифруется и может быть перехвачен или подменен провайдером.</p>
+        </div>
+      </div>
+
+      <h3>Установка на разные платформы</h3>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Платформа</th>
+            <th>Метод установки</th>
+            <th>Требует ПО</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Windows 11</td>
+            <td>Нативная настройка DoH/DoT</td>
+            <td>Нет</td>
+          </tr>
+          <tr>
+            <td>Windows 10</td>
+            <td>GUI Setup Utility или ctrld</td>
+            <td>Да</td>
+          </tr>
+          <tr>
+            <td>macOS Big Sur+</td>
+            <td>Нативная настройка DoH/DoT</td>
+            <td>Нет</td>
+          </tr>
+          <tr>
+            <td>Linux</td>
+            <td>ctrld daemon или systemd-resolved</td>
+            <td>Да (ctrld)</td>
+          </tr>
+          <tr>
+            <td>iOS 14+</td>
+            <td>Нативная настройка DoH/DoT</td>
+            <td>Нет</td>
+          </tr>
+          <tr>
+            <td>Android 9+</td>
+            <td>Нативная настройка DoT</td>
+            <td>Нет</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- PROFILES SECTION -->
+    <section id="profiles">
+      <h2>Профили для Нью-Йорка</h2>
+      
+      <h3>Философия JFK-профиля</h3>
+      <p>JFK-профиль создает иллюзию нахождения в Нью-Йорке (JFK — код аэропорта). Основной принцип: <strong>весь трафик идет через JFK</strong>, кроме явно прописанных исключений.</p>
+      
+      <div class="cards-grid">
+        <div class="card">
+          <h4>🌍 Гео-маскировка</h4>
+          <p>Ваш IP адрес выглядит так, как будто вы находитесь в Нью-Йорке (East Coast USA)</p>
+        </div>
+        <div class="card">
+          <h4>🔒 Приватность</h4>
+          <p>Реальный IP скрывается за прокси-сервером. Сайты видят только JFK IP</p>
+        </div>
+        <div class="card">
+          <h4>⚡ Скорость</h4>
+          <p>Оптимизированные маршруты через Windscribe инфраструктуру в Нью-Йорке</p>
+        </div>
+        <div class="card">
+          <h4>🛡️ Безопасность</h4>
+          <p>Встроенная фильтрация: малвер, реклама, трекеры, IoT телеметрия</p>
+        </div>
+      </div>
+
+      <h3>Архитектура профиля</h3>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Слой</th>
+            <th>Назначение</th>
+            <th>Действие</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Фильтры</td>
+            <td>Базовая защита</td>
+            <td>Malware + Ads + Typo + IoT — ON</td>
+          </tr>
+          <tr>
+            <td>Сервисы</td>
+            <td>Перенаправление ключевых сервисов</td>
+            <td>REDIRECT через JFK для 60+ сервисов</td>
+          </tr>
+          <tr>
+            <td>Кастомные домены</td>
+            <td>Точечные правила для доменов</td>
+            <td>REDIRECT/BYPASS для специфических доменов</td>
+          </tr>
+          <tr>
+            <td>Geo-правила</td>
+            <td>Автоматический редирект не-US трафика</td>
+            <td>!@US → REDIRECT JFK</td>
+          </tr>
+          <tr>
+            <td>Default Rule</td>
+            <td>Всё остальное</td>
+            <td>REDIRECT через JFK</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Сервисы, перенаправляемые через JFK</h3>
+      
+      <div class="cards-grid">
+        <div class="card">
+          <h4>🤖 AI & Tech</h4>
+          <p>Google, YouTube, ChatGPT, Claude, Gemini, GitHub, Cloudflare, OpenAI</p>
+        </div>
+        <div class="card">
+          <h4>👥 Социальные сети</h4>
+          <p>Facebook, Instagram, WhatsApp, Messenger, Threads, Telegram, Twitter</p>
+        </div>
+        <div class="card">
+          <h4>💰 Финансы</h4>
+          <p>PayPal, Wise, Revolut, Venmo, JPMorgan, Citi, Visa, Mastercard</p>
+        </div>
+        <div class="card">
+          <h4>🎬 Потоковое вещание</h4>
+          <p>Spotify, Netflix, Hulu, Twitch, Discord</p>
+        </div>
+      </div>
+
+      <div class="callout callout-danger">
+        <div class="callout-content">
+          <div class="callout-title">⚠️ Важное ограничение</div>
+          <p>Перенаправление всего трафика может сломать SSH, игры, VoIP-приложения. Используйте с осторожностью и настраивайте bypass для проблемных сервисов.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOCS SECTION -->
+    <section id="docs">
+      <h2>Полезные ресурсы</h2>
+      
+      <div class="cards-grid">
+        <div class="card">
+          <h4>📚 Документация</h4>
+          <p>Полное руководство с примерами и объяснениями всех компонентов</p>
+          <a href="https://docs.controld.com" class="btn btn-secondary" style="margin-top: 1rem;">Перейти →</a>
+        </div>
+        <div class="card">
+          <h4>🎛️ Панель управления</h4>
+          <p>Создание и управление профилями, endpoints и правилами</p>
+          <a href="https://controld.com/dashboard" class="btn btn-secondary" style="margin-top: 1rem;">Открыть →</a>
+        </div>
+        <div class="card">
+          <h4>💻 GitHub (ctrld)</h4>
+          <p>Open Source клиент для Linux, macOS и Windows</p>
+          <a href="https://github.com/Control-D-Inc/ctrld" class="btn btn-secondary" style="margin-top: 1rem;">Посмотреть →</a>
+        </div>
+        <div class="card">
+          <h4>📊 Статус страница</h4>
+          <p>Проверка настроек и диагностика DNS-резолвера</p>
+          <a href="https://controld.com/status" class="btn btn-secondary" style="margin-top: 1rem;">Проверить →</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>📖 <strong>Control D: Полный гайд</strong> | Версия 3.0 | 2025-05-08</p>
+  <p style="color: var(--text-muted); font-size: 0.9rem;">Документация и примеры профилей для настройки DNS-резолвера Control D</p>
+  <div class="footer-links">
+    <a href="https://controld.com">controld.com</a>
+    <a href="https://docs.controld.com">Документация</a>
+    <a href="https://github.com/Control-D-Inc/ctrld">GitHub</a>
+    <a href="https://controld.com/status">Status Page</a>
+  </div>
+  <p style="margin-top: 2rem; font-size: 0.85rem;">Made with ❤️ by Control D Community</p>
+</footer>
+
+<script>
+  // Highlight code blocks
+  document.querySelectorAll('pre code').forEach((block) => {
+    hljs.highlightElement(block);
+  });
+
+  // Smooth scroll for TOC
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
