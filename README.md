@@ -1,11 +1,11 @@
-# Control D - NY-NY ULTIMATE Package (JFK Cloaking)
+# Control D - NY-NY ULTIMATE Package v5.0 (JFK Cloaking)
 
 ## What's Included
 
 | File | Description |
 |------|-------------|
 | `Control-D-Guide.pdf` | Complete Control D guide (Russian, 22 pages) |
-| `profiles/NY-GCR-Ultimate.json` | Ultimate JFK cloaking profile (v4.0) |
+| `profiles/NY-GCR-Ultimate.json` | Ultimate JFK cloaking profile (v5.0) |
 | `scripts/install-ny.sh` | One-click NY-NY Ultimate setup script |
 | `controld-guide.html` | Interactive Russian guide |
 
@@ -42,7 +42,7 @@ Or run: `curl https://ipinfo.io`
 
 ---
 
-## Profile Architecture (v4.0)
+## Profile Architecture (v5.0)
 
 ```
 Traffic Flow:
@@ -60,8 +60,10 @@ Rules Priority (highest first):
 
 - **100% Traffic** redirected through JFK (NYC)
 - **Zero Traces**: Logging disabled, analytics/tracking blocked
-- **Maximum Privacy**: Strict ad-blocking and malware protection
+- **Maximum Privacy**: Strict ad-blocking, AI Malware Filter, and DNS Rebind Protection
 - **Global Geo-Rule**: All non-US traffic forced through JFK
+- **Advanced Features**: TTL Overrides for caching, IPv4/IPv6 Compatibility
+- **Magic Folders**: Captive portal bypasses and "Do Not Log" verification
 - **No Bypasses**: Even VPN and analytics services are proxied for total anonymity
 
 ---
@@ -75,5 +77,5 @@ Rules Priority (highest first):
 
 ---
 
-*Profile version: 4.0 | Last updated: 2026-05-07*
+*Profile version: 5.0 | Last updated: 2026-05-14*
 *Created by Manus AI for родной*

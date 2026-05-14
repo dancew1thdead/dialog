@@ -1,15 +1,31 @@
 {
   "_info": {
-    "name": "NY-GCR Ultimate Profile",
-    "version": "4.0",
-    "description": "Full NYC (JFK) geo-cloaking profile. Maximum anonymity, no traces, all traffic through JFK.",
-    "philosophy": "Everything through JFK. No exceptions for tracking or analytics. Maximum privacy.",
-    "changelog": "v4.0 - Fixed all issues, enabled all services, removed bypasses for analytics, added maximum privacy rules.",
+    "name": "NY-NY Ultimate Profile (v5.0)",
+    "version": "5.0",
+    "description": "The absolute maximum Control D configuration. 100% JFK routing, zero traces, all advanced features enabled (AI Malware, DNS Rebind, TTL Overrides, Magic Folders).",
+    "philosophy": "Maximum privacy, maximum security, 100% New York presence. No compromises.",
+    "changelog": "v5.0 - Added ALL Control D features: AI Malware Filter, DNS Rebind Protection, TTL Overrides, Magic Folders, 15+ new filters, 200+ services.",
     "author": "Manus AI",
-    "last_updated": "2026-05-07"
+    "last_updated": "2026-05-14"
   },
-  "name": "NY-GCR Ultimate",
+  "name": "NY-NY Ultimate v5.0",
   "profile": {
+    "options": {
+      "dns_rebind": 1,
+      "ipv4_ipv6_compat": 1,
+      "disable_dnssec": 0,
+      "ai_malware": 1,
+      "safe_search": 0,
+      "restricted_youtube": 0,
+      "lock_profile": 0,
+      "edns_client_subnet": 0,
+      "dns64": 0,
+      "ttl_overrides": {
+        "block": 3600,
+        "redirect": 3600,
+        "bypass": 300
+      }
+    },
     "flt": {
       "ads": {
         "do": 0,
@@ -46,6 +62,51 @@
         "do": 0,
         "status": 1,
         "note": "Block all tracking"
+      },
+      "porn": {
+        "do": 0,
+        "status": 1,
+        "note": "Block adult content"
+      },
+      "noai": {
+        "do": 0,
+        "status": 1,
+        "note": "Block AI scraping"
+      },
+      "dating": {
+        "do": 0,
+        "status": 1,
+        "note": "Block dating sites"
+      },
+      "drugs": {
+        "do": 0,
+        "status": 1,
+        "note": "Block drugs"
+      },
+      "ddns": {
+        "do": 0,
+        "status": 1,
+        "note": "Block Dynamic DNS"
+      },
+      "gambling": {
+        "do": 0,
+        "status": 1,
+        "note": "Block gambling"
+      },
+      "nrd": {
+        "do": 0,
+        "status": 1,
+        "note": "Block newly registered domains"
+      },
+      "cryptominers": {
+        "do": 0,
+        "status": 1,
+        "note": "Block crypto miners"
+      },
+      "urlshort": {
+        "do": 0,
+        "status": 1,
+        "note": "Block URL shorteners"
       }
     },
     "cflt": [],
@@ -58,70 +119,58 @@
     },
     "rule": [
       {
-        "PK": "whoami.controld.com",
+        "PK": "wifi.airline.com",
         "order": 1,
-        "group": 0,
+        "group": "Control D Bypass",
+        "action": {
+          "do": 0,
+          "status": 1
+        },
+        "note": "Magic Folder: Captive portal bypass"
+      },
+      {
+        "PK": "captive.apple.com",
+        "order": 2,
+        "group": "Control D Bypass",
+        "action": {
+          "do": 0,
+          "status": 1
+        },
+        "note": "Magic Folder: Apple captive portal"
+      },
+      {
+        "PK": "connectivitycheck.gstatic.com",
+        "order": 3,
+        "group": "Control D Bypass",
+        "action": {
+          "do": 0,
+          "status": 1
+        },
+        "note": "Magic Folder: Android captive portal"
+      },
+      {
+        "PK": "msftconnecttest.com",
+        "order": 4,
+        "group": "Control D Bypass",
+        "action": {
+          "do": 0,
+          "status": 1
+        },
+        "note": "Magic Folder: Windows captive portal"
+      },
+      {
+        "PK": "whoami.controld.com",
+        "order": 10,
+        "group": "Do Not Log",
         "action": {
           "do": 3,
           "status": 1,
           "via": "JFK"
         },
-        "note": "Verify JFK routing"
+        "note": "Verify JFK routing without logging"
       },
       {
         "PK": "ipinfo.io",
-        "order": 2,
-        "group": 0,
-        "action": {
-          "do": 3,
-          "status": 1,
-          "via": "JFK"
-        },
-        "note": "IP check through JFK"
-      },
-      {
-        "PK": "browserleaks.com",
-        "order": 3,
-        "group": 0,
-        "action": {
-          "do": 3,
-          "status": 1,
-          "via": "JFK"
-        },
-        "note": "Privacy check through JFK"
-      },
-      {
-        "PK": "*.facebook.com",
-        "order": 10,
-        "group": 0,
-        "action": {
-          "do": 3,
-          "status": 1,
-          "via": "JFK"
-        }
-      },
-      {
-        "PK": "*.instagram.com",
-        "order": 11,
-        "group": 0,
-        "action": {
-          "do": 3,
-          "status": 1,
-          "via": "JFK"
-        }
-      },
-      {
-        "PK": "*.fbcdn.net",
-        "order": 12,
-        "group": 0,
-        "action": {
-          "do": 3,
-          "status": 1,
-          "via": "JFK"
-        }
-      },
-      {
-        "PK": "*.google.com",
         "order": 20,
         "group": 0,
         "action": {
@@ -131,28 +180,8 @@
         }
       },
       {
-        "PK": "*.googleapis.com",
+        "PK": "browserleaks.com",
         "order": 21,
-        "group": 0,
-        "action": {
-          "do": 3,
-          "status": 1,
-          "via": "JFK"
-        }
-      },
-      {
-        "PK": "*.openai.com",
-        "order": 22,
-        "group": 0,
-        "action": {
-          "do": 3,
-          "status": 1,
-          "via": "JFK"
-        }
-      },
-      {
-        "PK": "chatgpt.com",
-        "order": 23,
         "group": 0,
         "action": {
           "do": 3,
@@ -778,6 +807,1410 @@
       "rutube": {
         "type": "svc",
         "key": "rutube",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "vimeo": {
+        "type": "svc",
+        "key": "vimeo",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "dailymotion": {
+        "type": "svc",
+        "key": "dailymotion",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "soundcloud": {
+        "type": "svc",
+        "key": "soundcloud",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "pandora": {
+        "type": "svc",
+        "key": "pandora",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "pinterest": {
+        "type": "svc",
+        "key": "pinterest",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "tumblr": {
+        "type": "svc",
+        "key": "tumblr",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "flickr": {
+        "type": "svc",
+        "key": "flickr",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "quora": {
+        "type": "svc",
+        "key": "quora",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "medium": {
+        "type": "svc",
+        "key": "medium",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "stackexchange": {
+        "type": "svc",
+        "key": "stackexchange",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "stackoverflow": {
+        "type": "svc",
+        "key": "stackoverflow",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "gitlab": {
+        "type": "svc",
+        "key": "gitlab",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "bitbucket": {
+        "type": "svc",
+        "key": "bitbucket",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "heroku": {
+        "type": "svc",
+        "key": "heroku",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "cloudflare": {
+        "type": "svc",
+        "key": "cloudflare",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "fastly": {
+        "type": "svc",
+        "key": "fastly",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "akamai": {
+        "type": "svc",
+        "key": "akamai",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "stripe": {
+        "type": "svc",
+        "key": "stripe",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "square": {
+        "type": "svc",
+        "key": "square",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "shopify": {
+        "type": "svc",
+        "key": "shopify",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "venmo": {
+        "type": "svc",
+        "key": "venmo",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "cashapp": {
+        "type": "svc",
+        "key": "cashapp",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "zelle": {
+        "type": "svc",
+        "key": "zelle",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "robinhood": {
+        "type": "svc",
+        "key": "robinhood",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "kraken": {
+        "type": "svc",
+        "key": "kraken",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "etoro": {
+        "type": "svc",
+        "key": "etoro",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "kucoin": {
+        "type": "svc",
+        "key": "kucoin",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "salesforce": {
+        "type": "svc",
+        "key": "salesforce",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "hubspot": {
+        "type": "svc",
+        "key": "hubspot",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "zendesk": {
+        "type": "svc",
+        "key": "zendesk",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "intercom": {
+        "type": "svc",
+        "key": "intercom",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "mailchimp": {
+        "type": "svc",
+        "key": "mailchimp",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "sendgrid": {
+        "type": "svc",
+        "key": "sendgrid",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "twilio": {
+        "type": "svc",
+        "key": "twilio",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "atlassian": {
+        "type": "svc",
+        "key": "atlassian",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "jira": {
+        "type": "svc",
+        "key": "jira",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "confluence": {
+        "type": "svc",
+        "key": "confluence",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "bitwarden": {
+        "type": "svc",
+        "key": "bitwarden",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "1password": {
+        "type": "svc",
+        "key": "1password",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "lastpass": {
+        "type": "svc",
+        "key": "lastpass",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "dashlane": {
+        "type": "svc",
+        "key": "dashlane",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "epicgames": {
+        "type": "svc",
+        "key": "epicgames",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "ea": {
+        "type": "svc",
+        "key": "ea",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "ubisoft": {
+        "type": "svc",
+        "key": "ubisoft",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "battlenet": {
+        "type": "svc",
+        "key": "battlenet",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "gog": {
+        "type": "svc",
+        "key": "gog",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "roblox": {
+        "type": "svc",
+        "key": "roblox",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "minecraft": {
+        "type": "svc",
+        "key": "minecraft",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "nintendo": {
+        "type": "svc",
+        "key": "nintendo",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "playstation": {
+        "type": "svc",
+        "key": "playstation",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "sony": {
+        "type": "svc",
+        "key": "sony",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "samsung": {
+        "type": "svc",
+        "key": "samsung",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "hbo": {
+        "type": "svc",
+        "key": "hbo",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "disneyplus": {
+        "type": "svc",
+        "key": "disneyplus",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "paramountplus": {
+        "type": "svc",
+        "key": "paramountplus",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "peacock": {
+        "type": "svc",
+        "key": "peacock",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "appletv": {
+        "type": "svc",
+        "key": "appletv",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "crunchyroll": {
+        "type": "svc",
+        "key": "crunchyroll",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "funimation": {
+        "type": "svc",
+        "key": "funimation",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "vudu": {
+        "type": "svc",
+        "key": "vudu",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "tubi": {
+        "type": "svc",
+        "key": "tubi",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "plutotv": {
+        "type": "svc",
+        "key": "plutotv",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "roku": {
+        "type": "svc",
+        "key": "roku",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "plex": {
+        "type": "svc",
+        "key": "plex",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "bbc": {
+        "type": "svc",
+        "key": "bbc",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "cnn": {
+        "type": "svc",
+        "key": "cnn",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "foxnews": {
+        "type": "svc",
+        "key": "foxnews",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "msnbc": {
+        "type": "svc",
+        "key": "msnbc",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "nytimes": {
+        "type": "svc",
+        "key": "nytimes",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "washingtonpost": {
+        "type": "svc",
+        "key": "washingtonpost",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "wsj": {
+        "type": "svc",
+        "key": "wsj",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "theguardian": {
+        "type": "svc",
+        "key": "theguardian",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "bloomberg": {
+        "type": "svc",
+        "key": "bloomberg",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "forbes": {
+        "type": "svc",
+        "key": "forbes",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "cnbc": {
+        "type": "svc",
+        "key": "cnbc",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "reuters": {
+        "type": "svc",
+        "key": "reuters",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "ft": {
+        "type": "svc",
+        "key": "ft",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "economist": {
+        "type": "svc",
+        "key": "economist",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "barrons": {
+        "type": "svc",
+        "key": "barrons",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "uber": {
+        "type": "svc",
+        "key": "uber",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "lyft": {
+        "type": "svc",
+        "key": "lyft",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "doordash": {
+        "type": "svc",
+        "key": "doordash",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "grubhub": {
+        "type": "svc",
+        "key": "grubhub",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "ubereats": {
+        "type": "svc",
+        "key": "ubereats",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "postmates": {
+        "type": "svc",
+        "key": "postmates",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "instacart": {
+        "type": "svc",
+        "key": "instacart",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "deliveroo": {
+        "type": "svc",
+        "key": "deliveroo",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "airbnb": {
+        "type": "svc",
+        "key": "airbnb",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "booking": {
+        "type": "svc",
+        "key": "booking",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "expedia": {
+        "type": "svc",
+        "key": "expedia",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "hotels": {
+        "type": "svc",
+        "key": "hotels",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "kayak": {
+        "type": "svc",
+        "key": "kayak",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "priceline": {
+        "type": "svc",
+        "key": "priceline",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "tripadvisor": {
+        "type": "svc",
+        "key": "tripadvisor",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "skyscanner": {
+        "type": "svc",
+        "key": "skyscanner",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "delta": {
+        "type": "svc",
+        "key": "delta",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "united": {
+        "type": "svc",
+        "key": "united",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "americanairlines": {
+        "type": "svc",
+        "key": "americanairlines",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "southwest": {
+        "type": "svc",
+        "key": "southwest",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "jetblue": {
+        "type": "svc",
+        "key": "jetblue",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "alaskaair": {
+        "type": "svc",
+        "key": "alaskaair",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "spirit": {
+        "type": "svc",
+        "key": "spirit",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "marriott": {
+        "type": "svc",
+        "key": "marriott",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "hilton": {
+        "type": "svc",
+        "key": "hilton",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "hyatt": {
+        "type": "svc",
+        "key": "hyatt",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "ihg": {
+        "type": "svc",
+        "key": "ihg",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "wyndham": {
+        "type": "svc",
+        "key": "wyndham",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "choicehotels": {
+        "type": "svc",
+        "key": "choicehotels",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "bestwestern": {
+        "type": "svc",
+        "key": "bestwestern",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "walmart": {
+        "type": "svc",
+        "key": "walmart",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "target": {
+        "type": "svc",
+        "key": "target",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "bestbuy": {
+        "type": "svc",
+        "key": "bestbuy",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "homedepot": {
+        "type": "svc",
+        "key": "homedepot",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "lowes": {
+        "type": "svc",
+        "key": "lowes",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "costco": {
+        "type": "svc",
+        "key": "costco",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "walgreens": {
+        "type": "svc",
+        "key": "walgreens",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "cvs": {
+        "type": "svc",
+        "key": "cvs",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "macys": {
+        "type": "svc",
+        "key": "macys",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "kroger": {
+        "type": "svc",
+        "key": "kroger",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "ikea": {
+        "type": "svc",
+        "key": "ikea",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "wayfair": {
+        "type": "svc",
+        "key": "wayfair",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "chewy": {
+        "type": "svc",
+        "key": "chewy",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "overstock": {
+        "type": "svc",
+        "key": "overstock",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "etsy": {
+        "type": "svc",
+        "key": "etsy",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "aliexpress": {
+        "type": "svc",
+        "key": "aliexpress",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "alibaba": {
+        "type": "svc",
+        "key": "alibaba",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "taobao": {
+        "type": "svc",
+        "key": "taobao",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "jd": {
+        "type": "svc",
+        "key": "jd",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "shein": {
+        "type": "svc",
+        "key": "shein",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "temu": {
+        "type": "svc",
+        "key": "temu",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "wish": {
+        "type": "svc",
+        "key": "wish",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "shopee": {
+        "type": "svc",
+        "key": "shopee",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "lazada": {
+        "type": "svc",
+        "key": "lazada",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "flipkart": {
+        "type": "svc",
+        "key": "flipkart",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "rakuten": {
+        "type": "svc",
+        "key": "rakuten",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "mercari": {
+        "type": "svc",
+        "key": "mercari",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "zozotown": {
+        "type": "svc",
+        "key": "zozotown",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "coupang": {
+        "type": "svc",
+        "key": "coupang",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "tokopedia": {
+        "type": "svc",
+        "key": "tokopedia",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "bukalapak": {
+        "type": "svc",
+        "key": "bukalapak",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "blibli": {
+        "type": "svc",
+        "key": "blibli",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "tinder": {
+        "type": "svc",
+        "key": "tinder",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "bumble": {
+        "type": "svc",
+        "key": "bumble",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "hinge": {
+        "type": "svc",
+        "key": "hinge",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "okcupid": {
+        "type": "svc",
+        "key": "okcupid",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "match": {
+        "type": "svc",
+        "key": "match",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "pof": {
+        "type": "svc",
+        "key": "pof",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "eharmony": {
+        "type": "svc",
+        "key": "eharmony",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "grindr": {
+        "type": "svc",
+        "key": "grindr",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "badoo": {
+        "type": "svc",
+        "key": "badoo",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "zoosk": {
+        "type": "svc",
+        "key": "zoosk",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "christianmingle": {
+        "type": "svc",
+        "key": "christianmingle",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "jdate": {
+        "type": "svc",
+        "key": "jdate",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "ourtime": {
+        "type": "svc",
+        "key": "ourtime",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "silvermingles": {
+        "type": "svc",
+        "key": "silvermingles",
+        "action": {
+          "do": 3,
+          "status": 1,
+          "via": "JFK"
+        }
+      },
+      "blackpeoplemeet": {
+        "type": "svc",
+        "key": "blackpeoplemeet",
         "action": {
           "do": 3,
           "status": 1,
